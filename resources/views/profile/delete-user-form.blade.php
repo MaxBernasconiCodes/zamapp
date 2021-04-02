@@ -14,14 +14,14 @@
 
         <div class="mt-5">
             <x-jet-danger-button wire:click="confirmUserDeletion" wire:loading.attr="disabled">
-                {{ __('Delete Account') }}
+                {{ __('Eliminar cuenta') }}
             </x-jet-danger-button>
         </div>
 
         <!-- Delete User Confirmation Modal -->
         <x-jet-dialog-modal wire:model="confirmingUserDeletion">
             <x-slot name="title">
-                {{ __('Delete Account') }}
+                {{ __('Eliminar cuenta') }}
             </x-slot>
 
             <x-slot name="content">
