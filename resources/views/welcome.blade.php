@@ -18,23 +18,49 @@
             body {
                 font-family: 'Nunito', sans-serif;
             }
+            #logo:hover
+            {
+                transform: scale(0.9);
+                opacity: 0.9;
+                transition-duration: 50ms;
+            }
+            #logo:active{
+                transform: scale(0.8);
+                opacity: 0.8;
+                transition-duration: 50ms;
+            }
+
         </style>
     </head>
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Panel</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Ingresar</a>
-                    @endauth
-                </div>
-            @endif
+    <body class="bg-gray-100 dark:bg-gray-900">
+    <div class="h-screen">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-screen">
+            <div class="overflow-hidden shadow-xl sm:rounded-lg h-screen">
+                @if (Route::has('login'))
+                    <div class="flex justify-center pt-8 border-2 border-white rounded-full">
+                        @auth
+                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-500">
+                            <div id="logo" class="flex justify-center pt-8 ">
+                                <x-jet-application-logo class="block h-12 w-auto" />
+                            </div>
+                            Panel
+                            </a>
+                        @else
+                            <a href="{{ route('login') }}" class="text-sm text-gray-500 ">
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+                                <div id="logo" class="flex justify-center pt-8">
+                                    <x-jet-application-logo class="block h-12 w-auto" />
+                                </div>
+                                Ingresar
+                            </a>
+                        @endauth
+                    </div>
+                @endif
 
             </div>
+
         </div>
+    </div>
+
     </body>
 </html>

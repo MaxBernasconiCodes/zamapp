@@ -538,6 +538,9 @@ object {
   vertical-align: middle;
 }
 
+iframe{
+    overflow:hidden;
+}
 /**
  * Constrain images and videos to the parent width and preserve
  * their instrinsic aspect ratio.

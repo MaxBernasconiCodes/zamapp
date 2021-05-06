@@ -1,14 +1,10 @@
-<div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-    <div>
-        <x-jet-application-logo class="block h-12 w-auto" />
-    </div>
-
-    <div class="mt-8 text-2xl">
+<div class="p-4 pt-0 sm:px-20 sm:pt-0 bg-white border-b border-gray-200">
+      <div class="mt-6 sm:mt-2 text-2xl">
         Bienvenido a Zamora-App
     </div>
 
-    <div class="mt-6 text-gray-500">
-        Por consultas o solicitudes acerca de la aplicacion, puede comunicarse con el personal de administracion en RollingCode
+    <div class="mt-4 sm-mt text-gray-500">
+        Por consultas o solicitudes acerca de la aplicacion, puede comunicarse con el personal de administracion.
     </div>
 </div>
 
@@ -24,9 +20,9 @@
                 Puede revisar la documentacion acerca de la modalidad de uso de la aplicacion a travez de este link
             </div>
 
-            <a href="https://laravel.com/docs">
+            <a href="#">
                 <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
-                        <div>Explore the documentation</div>
+                        <div>Documentacion</div>
 
                         <div class="ml-1 text-indigo-500">
                             <svg viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -38,16 +34,15 @@
 
     <div class="p-6 border-t border-gray-200 md:border-t-0 md:border-l">
         <div class="flex items-center">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-gray-400"><path d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="https://laracasts.com">Noticias</a></div>
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" data-icon="newspaper" class="svg-inline--fa fa-newspaper fa-w-18 w-8 h-8 text-gray-400" role="img" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" ><path fill="currentColor" d="M552 64H88c-13.255 0-24 10.745-24 24v8H24c-13.255 0-24 10.745-24 24v272c0 30.928 25.072 56 56 56h472c26.51 0 48-21.49 48-48V88c0-13.255-10.745-24-24-24zM56 400a8 8 0 0 1-8-8V144h16v248a8 8 0 0 1-8 8zm236-16H140c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h152c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12zm208 0H348c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h152c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12zm-208-96H140c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h152c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12zm208 0H348c-6.627 0-12-5.373-12-12v-8c0-6.627 5.373-12 12-12h152c6.627 0 12 5.373 12 12v8c0 6.627-5.373 12-12 12zm0-96H140c-6.627 0-12-5.373-12-12v-40c0-6.627 5.373-12 12-12h360c6.627 0 12 5.373 12 12v40c0 6.627-5.373 12-12 12z"></path></svg>            <div class="ml-4 text-lg text-gray-600 leading-7 font-semibold"><a href="#">Noticias</a></div>
         </div>
 
         <div class="ml-12">
             <div class="mt-2 text-sm text-gray-500">
-                Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
+                Aqui iran los links a las noticias mas recientes que se dejen en la pagina
             </div>
 
-            <a href="https://laracasts.com">
+            <a href="#">
                 <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
                         <div>Noticias</div>
 

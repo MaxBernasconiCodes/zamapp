@@ -12,7 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
+        <script src="https://kit.fontawesome.com/b3c91082bf.js" crossorigin="anonymous"></script>
         @livewireStyles
 
         <!-- Scripts -->

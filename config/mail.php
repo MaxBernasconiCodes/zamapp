@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
             'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            'encryption' => env('MAIL_ENCRYPTION', 'tsl'),
+            'username' => env('MAIL_USERNAME','max.bernasconi86@gmail.com'),
+            'password' => env('MAIL_PASSWORD','dapqajjmtljjtpjv'),
             'timeout' => null,
             'auth_mode' => null,
         ],

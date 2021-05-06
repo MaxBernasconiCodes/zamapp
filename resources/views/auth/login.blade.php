@@ -22,9 +22,10 @@
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Contraseña') }}" />
-                <x-jet-input id="password" class="inline mt-1 w-5/6 rounded-l" type="password" name="password" required autocomplete="current-password" />
-                <label class="float-right inline mt-1 w-1/6 text-center p-2 border border-gray-600 rounded-full">btn<i class="far fa-eye"></i><i class="far fa-eye-slash"></i></label>
+                <x-jet-input id="password" class="inline mt-1 w-full rounded-l" type="password" name="password" required autocomplete="current-password" />
+                <livewire:eyebutton class="float-right "></livewire:eyebutton>
             </div>
+
 
             <div class="block mt-4">
                 <label for="remember_me" class="flex items-center">
@@ -46,4 +47,5 @@
             </div>
         </form>
     </x-jet-authentication-card>
+
 </x-guest-layout>

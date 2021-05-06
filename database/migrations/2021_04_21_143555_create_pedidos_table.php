@@ -15,7 +15,28 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->text('agencia');
+            $table->text('despachante');
+            $table->text('consolidacion');
+            $table->text('destino');
+            $table->integer('contenedores');
+            $table->text('descripcion');
+            $table->integer('pedido_nro');
+            $table->integer('semana_salida');
+            $table->date('fecha_cortedocumental');
+            $table->date('fecha_cortefisico');
+            $table->text('barco_nombre');
+            $table->text('barco_contenedores');
+            $table->text('barco_nro_contenedor');
+            $table->text('barco_nro_remito');
+            $table->text('barco_nro_booking');
+            $table->date('fecha_destino');
+            $table->integer('estado');
+
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
