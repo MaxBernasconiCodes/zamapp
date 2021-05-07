@@ -15,7 +15,7 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($operation = 0, $message = '')
+    public function index($operation = 0, $message = '', $search = '')
     {
         $usuarios = User::all();
         switch ($operation)
@@ -34,6 +34,9 @@ class PedidoController extends Controller
                 $data = Pedido::onlyTrashed()->orderByDesc('created_at')->get();
                 $operacion = 'Eliminados';
                 $message = 'Mostrando los registros de Pedidos Eliminados';
+                break;
+            case 3:
+                $data = Pedido::withTrashed()->where(')
                 break;
             default:
                 $data = Pedido::withTrashed()->where();
