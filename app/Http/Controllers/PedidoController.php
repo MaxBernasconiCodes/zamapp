@@ -17,6 +17,7 @@ class PedidoController extends Controller
      */
     public function index($operation = 0, $message = '')
     {
+        $usuarios = User::all();
         switch ($operation)
         {
             case 0:
@@ -42,7 +43,7 @@ class PedidoController extends Controller
 
         }
 
-        return view('pedido.index', compact(['data','operacion','message']));
+        return view('pedido.index', compact(['data','usuarios','operacion','message']));
     }
 
     /**
@@ -52,7 +53,8 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return view('pedido.create');
+        $usuarios = User::all();
+        return view('pedido.create', compact('usuarios'));
     }
 
     /**
@@ -64,26 +66,43 @@ class PedidoController extends Controller
     public function store(Request $request)
     {
         Validator::make($request->all(), [
+            'user_id' => ['required', 'integer'],
             'agencia' => ['required', 'string', 'max:255'],
             'despachante' => ['required', 'string', 'max:255'],
             'consolidacion' => ['required', 'string', 'max:255'],
             'destino' => ['required', 'string', 'max:255'],
-
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'is_admin' => ['string'],
-            'password' => $this->passwordRules(),
+            'contenedores' => ['required', 'integer'],
+            'descripcion' => ['required', 'string', 'max:1000'],
+            'pedido_nro' => ['required', 'integer'],
+            'semana_salida' => ['required', 'integer'],
+            'fecha_cortedocumental' => ['required','date'],
+            'fecha_cortefisico' => ['required','date'],
+             'barco_nombre' => ['required', 'string', 'max:255'],
+            'barco_contenedores' => ['required', 'integer'],
+            'barco_nro_contenedor' => ['required', 'string', 'max:255'],
+            'barco_nro_remito' => ['required', 'string', 'max:255'],
+            'estado' => ['required', 'string', 'max:255'],
+            'fecha_destino' => ['required','date'],
         ])->validate();
 
         if(Pedido::create([
-            'business' => $request['business'],
-            'phone' => $request['phone'],
-            'adress' => $request['adress'],
-            'country' => $request['country'],
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'is_admin' => true,
-            'password' => Hash::make($request['password']),
+            'user_id' => $request['user_id'],
+            'agencia' => $request['agencia'],
+            'despachante' => $request['despachante'],
+            'consolidacion' => $request['consolidacion'],
+            'destino' => $request['destino'],
+            'contenedores' => $request['contenedores'],
+            'descripcion' => $request['descripcion'],
+            'pedido_nro' => $request['pedido_nro'],
+            'semana_salida' => $request['semana_salida'],
+            'fecha_cortedocumental' => $request['fecha_cortedocumental'],
+            'fecha_cortefisico' => $request['fecha_cortefisico'],
+            'barco_nombre' => $request['barco_nombre'],
+            'barco_contenedores' => $request['barco_contenedores'],
+            'barco_nro_contenedor' => $request['barco_nro_contenedor'],
+            'barco_nro_remito' => $request['barco_nro_remito'],
+            'estado' => $request['estado'],
+            'fecha_destino' => $request['fecha_destino'],
         ]))
         {
             return redirect()->route('pedidoIndex');
@@ -110,9 +129,10 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pedido $pedido)
+    public function edit($id)
     {
-        //
+        $pedido = Pedido::withTrashed()->findOrFail($id);
+        return view('user.edit', compact('pedido'));
     }
 
     /**
@@ -122,9 +142,30 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pedido $pedido)
+    public function update(Request $request, $id)
     {
-        //
+        $pedido = Pedido::withTrashed()->findOrFail($id);
+        Validator::make($request->all(), [
+            'user_id' => ['required', 'integer'],
+            'agencia' => ['required', 'string', 'max:255'],
+            'despachante' => ['required', 'string', 'max:255'],
+            'consolidacion' => ['required', 'string', 'max:255'],
+            'destino' => ['required', 'string', 'max:255'],
+            'contenedores' => ['required', 'integer'],
+            'descripcion' => ['required', 'string', 'max:1000'],
+            'pedido_nro' => ['required', 'integer'],
+            'semana_salida' => ['required', 'integer'],
+            'fecha_cortedocumental' => ['required','date'],
+            'fecha_cortefisico' => ['required','date'],
+            'barco_nombre' => ['required', 'string', 'max:255'],
+            'barco_contenedores' => ['required', 'integer'],
+            'barco_nro_contenedor' => ['required', 'string', 'max:255'],
+            'barco_nro_remito' => ['required', 'string', 'max:255'],
+            'estado' => ['required', 'string', 'max:255'],
+            'fecha_destino' => ['required','date'],
+        ])->validate();
+        $pedido->update($request->all());
+        return redirect()->route('pedidoIndex');
     }
 
     /**
@@ -133,8 +174,19 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pedido $pedido)
+    public function destroy($id)
     {
-        //
+        $pedido = Pedido::withTrashed()->findOrFail($id);
+        $message ='No se pudo realizar la operacion de eliminacion del pedido ' . $user->name ;
+        if (!$user->trashed()) {
+            $user->delete();
+            $message = 'Pedido Eliminado Exitosamente';
+        }
+        else{
+            $user->restore();
+            $message="Reactivacion del pedido $pedido->id exitosa";
+            return redirect()->route('peidoIndex',['message' => $message]);
+        }
+        return redirect()->route('peidoIndex',['message' => $message]);
     }
 }

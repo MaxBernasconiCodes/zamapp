@@ -33,7 +33,7 @@ class User extends Authenticatable
         'phone',
         'adress',
         'country',
-        'isadmin'
+        'is_admin'
     ];
 
     /**

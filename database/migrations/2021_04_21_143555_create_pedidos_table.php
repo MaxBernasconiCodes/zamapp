@@ -27,7 +27,7 @@ class CreatePedidosTable extends Migration
             $table->date('fecha_cortedocumental');
             $table->date('fecha_cortefisico');
             $table->text('barco_nombre');
-            $table->text('barco_contenedores');
+            $table->integer('barco_contenedores');
             $table->text('barco_nro_contenedor');
             $table->text('barco_nro_remito');
             $table->text('barco_nro_booking');
