@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Creacion de usuario nuevo') }}
+            {{ __('Creacion de pedido nuevo') }}
         </h2>
     </x-slot>
 
@@ -16,28 +16,32 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('usersRegister') }}">
+        <form method="POST" action="{{ route('pedidoRegister') }}">
             @csrf
             <div>
                 <div class="flex-row">
-                    <div>
-                        <x-jet-label for="business" value="{{ __('Empresa') }}" />
-                        <select id="user_id" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+
+                        <div class="mt-4 flex-col inline">
+                        <x-jet-label for="user_id" value="{{ __('Empresa') }}" />
+                        <select  onchange="asignarResponsable()" id="user_id" class="  border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ">
                             @forelse($usuarios as $usuario)
-                            <option value="{{$usuario->id}}">{{$usuario->name}}</option>
-                            @empty
-                                <option disabled value="-1">Sin usuarios</option>
+                            <option value="{{$usuario->name}}">{{$usuario->business}}</option>
+                            @empty<option disabled value="-1">Sin usuarios</option>
                             @endforelse
                         </select>
+                        </div>
+                        <div class="mt-4 flex-col inline border-2 rounded p-2 w-max">
+                            <label for="business"> Responsable: </label>
+                            <label id="business" class="mt-1 w-max" name="business"></label>
+                        </div>
                     </div>
-                </div>
-
-                <hr class="border-b-2 mt-4">
 
                 <div class="flex-row">
+
+
                     <div class="mt-4 flex-col">
-                        <x-jet-label for="name" value="{{ __('Nombre de Responsable') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                        <x-jet-label for="email" value="{{ __('Email') }}" />
+                        <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
                     </div>
 
                     <div class="mt-4 flex-col">
@@ -98,4 +102,11 @@
             </div>
         </form>
     </x-jet-authentication-card>
+
+    <script>
+        function asignarResponsable() {
+            var responsable = document.getElementById("user_id").value;
+            document.getElementById("business").innerHTML = responsable;
+        }
+    </script>
 </x-app-layout>

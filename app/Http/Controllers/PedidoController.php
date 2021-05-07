@@ -36,7 +36,15 @@ class PedidoController extends Controller
                 $message = 'Mostrando los registros de Pedidos Eliminados';
                 break;
             case 3:
-                $data = Pedido::withTrashed()->where(')
+                $data = Pedido::withTrashed()->orderByDesc('created_at')->get();
+                if(!empty($pedido_nro))
+                {
+                    $data = $data->where('pedido_nro', 'LIKE', '%'.$pedido_nro.'%')->get();
+                }
+                if(!empty($barco_nro_booking))
+                {
+                    $data = $data->where('pedido_nro', 'LIKE', '%'.$barco_nro_booking.'%')->get();
+                }
                 break;
             default:
                 $data = Pedido::withTrashed()->where();
