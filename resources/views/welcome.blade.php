@@ -56,6 +56,9 @@
                         @endauth
                     </div>
                 @endif
+                <a href="/test/admin"> Crear Admin </a>
+                    <a href="/test/user"> Crear User </a>
+                    <a href="/test/users/10"> Crear 10 Users </a>
 
             </div>
 
