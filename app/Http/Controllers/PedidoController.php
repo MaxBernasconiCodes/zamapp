@@ -84,14 +84,15 @@ class PedidoController extends Controller
             'destino' => ['required', 'string', 'max:255'],
             'contenedores' => ['required', 'integer'],
             'descripcion' => ['required', 'string', 'max:1000'],
-            'pedido_nro' => ['required', 'integer'],
-            'semana_salida' => ['required', 'integer'],
+            'pedido_nro' => ['required', 'string'],
+            'semana_salida' => ['required', 'string'],
             'fecha_cortedocumental' => ['required','date'],
             'fecha_cortefisico' => ['required','date'],
-             'barco_nombre' => ['required', 'string', 'max:255'],
+            'barco_nombre' => ['required', 'string', 'max:255'],
             'barco_contenedores' => ['required', 'integer'],
             'barco_nro_contenedor' => ['required', 'string', 'max:255'],
             'barco_nro_remito' => ['required', 'string', 'max:255'],
+            'barco_nro_booking' => ['required', 'string', 'max:255'],
             'estado' => ['required', 'string', 'max:255'],
             'fecha_destino' => ['required','date'],
         ])->validate();
@@ -112,8 +113,9 @@ class PedidoController extends Controller
             'barco_contenedores' => $request['barco_contenedores'],
             'barco_nro_contenedor' => $request['barco_nro_contenedor'],
             'barco_nro_remito' => $request['barco_nro_remito'],
-            'estado' => $request['estado'],
+            'barco_nro_booking' => $request['barco_nro_booking'],
             'fecha_destino' => $request['fecha_destino'],
+            'estado' => $request['estado'],
         ]))
         {
             return redirect()->route('pedidoIndex');

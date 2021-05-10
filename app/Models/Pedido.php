@@ -13,5 +13,9 @@ class Pedido extends Model
 
     protected $guarded = []; //TODO poner correctamente los atributos protegidas
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

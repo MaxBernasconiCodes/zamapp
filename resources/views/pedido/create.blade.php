@@ -21,18 +21,15 @@
 
                 <div class="flex-row rounded-t">
                     <div class="bg-green-400 p-2 pt-0 rounded-t ">
-                        <h3 class="bg-yellow-200 font-bold p-1 mb-4 -mx-2 rounded-t">Empresa</h3>
+                        <h3 class="bg-yellow-200 font-bold p-1 mb-4 -mx-2 rounded-t">Empresa / Responsable  <a href="{{route('usersCreate')}}" class="bg-green-500 text-gray-50 rounded px-2 m-1"> + </a> </h3>
                         <div class="mt-4 pt-4 inline">
-                        <select  onchange="asignarResponsable()" id="user_id" class="  w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ">
+                        <select  id="user_id" name="user_id" class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ">
+                            <option selected disabled>Elija una Empresa / Responsable</option>
                             @forelse($usuarios as $usuario)
-                            <option value="{{$usuario->name}}">{{$usuario->business}}</option>
+                            <option value="{{$usuario->id}}">{{$usuario->business}} / {{$usuario->name}}</option>
                             @empty<option disabled value="-1">Sin usuarios</option>
                             @endforelse
                         </select>
-                        </div>
-                        <div class="mt-4 flex-col block border-2 rounded p-2 w-full bg-white">
-                            <label for="business"> Responsable: </label>
-                            <label id="business" class="w-max" name="business"></label>
                         </div>
                     </div>
                 </div>
@@ -54,7 +51,7 @@
                     </div>
 
                     <div class="mt-4 flex-col">
-                        <x-jet-label for="consolidacion" value="{{ __('Consolidacion') }}" />
+                        <x-jet-label for="consolidacion" value="{{ __('Lugar de consolidacion') }}" />
                         <x-jet-input id="consolidacion" class="block mt-1 w-full" type="text" name="consolidacion" :value="old('consolidacion')" required />
                     </div>
 
@@ -65,12 +62,12 @@
 
                     <div class="mt-4 flex-col">
                         <x-jet-label for="contenedores" value="{{ __('Contenedores') }}" />
-                        <x-jet-input id="contenedores" class="block mt-1 w-full" type="text" name="contenedores" :value="old('contenedores')" required />
+                        <x-jet-input id="contenedores" class="block mt-1 w-full" type="number" min="1" name="contenedores" :value="old('contenedores')" required />
                     </div>
 
                     <div class="mt-4 flex-col">
                         <x-jet-label for="descripcion" value="{{ __('Descripcion') }}" />
-                        <x-jet-input id="descripcion" class="block mt-1 w-full" type="text" name="descripcion" :value="old('descripcion')" required />
+                        <x-jet-input id="descripcion" class="block mt-1 w-full" type="text" rows="3" name="descripcion" :value="old('descripcion')" required />
                     </div>
                     <div class="mt-4 flex-col">
                         <x-jet-label for="pedido_nro" value="{{ __('Numero de pedido') }}" />
@@ -79,27 +76,27 @@
 
                     <div class="mt-4 flex-col">
                         <x-jet-label for="semana_salida" value="{{ __('Semana de Salida') }}" />
-                        <x-jet-input id="semana_salida" class="block mt-1 w-full" type="week" name="semana_salida" :value="old('semana_salida')"  required />
+                        <x-jet-input id="semana_salida" class="block mt-1 w-full" type="week" name="semana_salida" :value="old('semana_salida', date('Y').'-W'.date('W'))"  required />
                     </div>
 
                     <div class="mt-4 flex-col">
-                        <x-jet-label for="fecha_cortedocumental" value="{{ __('Fecha de corde documental') }}" />
-                        <x-jet-input id="fecha_cortedocumental" class="block mt-1 w-full" type="date" name="fecha_cortedocumental" :value="old('fecha_cortedocumental')" required />
+                        <x-jet-label for="fecha_cortedocumental" value="{{ __('Fecha de corte documental') }}" />
+                        <x-jet-input id="fecha_cortedocumental" class="block mt-1 w-full" type="date" name="fecha_cortedocumental" :value="old('fecha_cortedocumental', date('Y-m-d'))" required />
                     </div>
                     <div class="mt-4 flex-col">
                         <x-jet-label for="fecha_cortefisico" value="{{ __('Fecha de corte fisico') }}" />
-                        <x-jet-input id="fecha_cortefisico" class="block mt-1 w-full" type="date" name="fecha_cortefisico" :value="old('fecha_cortefisico')" required />
+                        <x-jet-input id="fecha_cortefisico" class="block mt-1 w-full" type="date" name="fecha_cortefisico" :value="old('fecha_cortefisico', date('Y-m-d'))" required />
                     </div>
-                        <div class="bg-green-300 px-2 rounded ">
-                            <h3 class="bg-yellow-200 font-bold p-1 mt-4 -mx-2 rounded">Barco</h3>
+                    <div class="bg-green-300 px-2 rounded pb-4">
+                            <h3 class="bg-yellow-200 font-bold p-1  mt-4 -mx-2 rounded">Barco</h3>
                     <hr>
                     <div class="mt-4 flex-col">
                         <x-jet-label for="barco_nombre" value="{{ __('Nombre del Barco') }}" />
                         <x-jet-input id="barco_nombre" class="block mt-1 w-full" type="text" name="barco_nombre" :value="old('barco_nombre')" required />
                     </div>
                     <div class="mt-4 flex-col">
-                        <x-jet-label for="barco_contenedores" value="{{ __('Numero de contenedores') }}" />
-                        <x-jet-input id="barco_contenedores" class="block mt-1 w-full" type="text" name="barco_contenedores" :value="old('barco_contenedores')" required />
+                        <x-jet-label for="barco_contenedores" value="{{ __('Cantidad de contenedores') }}" />
+                        <x-jet-input id="barco_contenedores" class="block mt-1 w-full" type="number" min="1" name="barco_contenedores" :value="old('barco_contenedores')" required />
                     </div>
                     <div class="mt-4 flex-col">
                         <x-jet-label for="barco_nro_contenedor" value="{{ __('Nro de Contenedor') }}" />
@@ -115,15 +112,18 @@
                     </div>
                     <div class="mt-4 flex-col">
                         <x-jet-label for="fecha_destino" value="{{ __('Fecha de Destino') }}" />
-                        <x-jet-input id="fecha_destino" class="block mt-1 w-full" type="text" name="fecha_destino" :value="old('fecha_destino')" required />
+                        <x-jet-input id="fecha_destino"  class="block mt-1  w-full" type="date" name="fecha_destino" :value="old('fecha_destino', date('Y-m-d'))" required />
                     </div>
                     </div>
                         <div class="bg-green-400 px-2 rounded ">
                             <h3 class="bg-yellow-200 font-bold p-1 mt-4 -mx-2 rounded">Estado</h3>
-                    <hr>
                     <div class="mt-4 flex-col">
-                        <x-jet-label for="estado" value="{{ __('Estado') }}" />
-                        <x-jet-input id="estado" class="block mt-1 w-full" type="text" name="estado" :value="old('estado')" required />
+                        <select id="estado" name="estado" required class="mb-3 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option value="0" selected disabled>Seleccione un estado</option>
+                            <option value="1" class="bg-yellow-100">Preparacion</option>
+                            <option value="2" class="bg-yellow-300">In Transit</option>
+                            <option value="3" class="bg-green-600 text-gray-50">Entregado</option>
+                        </select>
                     </div>
                     </div>
                     <br>
@@ -143,9 +143,6 @@
     </x-jet-authentication-card>
 
     <script>
-        function asignarResponsable() {
-            var responsable = document.getElementById("user_id").value;
-            document.getElementById("business").innerHTML = responsable;
-        }
+
     </script>
 </x-app-layout>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pedido;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -26,5 +27,14 @@ class TestController extends Controller
         }
         return redirect('/');
     }
-
+    public function singlePedido()
+    {
+        Pedido::factory()->create();
+        return redirect('/pedidos/index/1');
+    }
+    public function lotsPedidos($ammount)
+    {
+        Pedido::factory()->count($ammount)->create();
+        return redirect('/pedidos/index/1');
+    }
 }
