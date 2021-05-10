@@ -3,7 +3,6 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Administracion de pedidos: ') }}<a href="/pedidos/index/1" class="hover:text-green-600 hover:underline"> <p class="inline @if($operacion == 'Todos') text-green-800 underline @endif " >Todos</p></a> | <a href="/pedidos/index/0" class="hover:text-green-600 hover:underline"> <p class="inline @if($operacion == 'Activos') text-green-800 underline @endif ">Activos</p></a> | <a href="/pedidos/index/2" class="hover:text-red-600  hover:underline"> <p class="inline @if($operacion == 'Eliminados') text-red-800 underline @endif ">Eliminados</a>
         </h2>
-        <a href="/test/pedidos/10"><label>Crear 10 Pedidos</label></a>
     </x-slot>
     @if($message != '')
     <livewire:alert.message :message="$message" />
@@ -21,20 +20,17 @@
                     <thead class="bg-gray-50">
                 <tr class="text-gray-600 text-left">
                     <th class="font-semibold text-sm uppercase px-6 py-4">
-                        N° pedido
-                    </th>
-                    <th class="font-semibold text-sm uppercase px-6 py-4">
-                        Fecha Saida
+                        N° pedido<br>Semana de Salida
                     </th>
                     <th class="font-semibold text-sm uppercase px-6 py-4">
                         Empresa
                         Responsable
                     </th>
-                    <th class="font-semibold text-sm uppercase px-6 py-4 text-center">
-                        Estado
+                    <th class="font-semibold text-sm uppercase px-6 py-4">
+                        Barco<br>N°Contenedor
                     </th>
                     <th class="font-semibold text-sm uppercase px-6 py-4 text-center">
-                        N°Contenedor
+                        Estado
                     </th>
                     <th class="font-semibold text-sm uppercase px-6 py-4">
                         Acciones

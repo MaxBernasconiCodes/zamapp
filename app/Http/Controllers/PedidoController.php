@@ -17,7 +17,7 @@ class PedidoController extends Controller
      */
     public function index($operation = 0, $message = '', $search = '')
     {
-        $usuarios = User::all();
+        $usuarios = User::withTrashed()->get();
         switch ($operation)
         {
             case 0:
@@ -198,8 +198,8 @@ class PedidoController extends Controller
         else{
             $pedido->restore();
             $message="Reactivacion del pedido $pedido->id exitosa";
-            return redirect()->route('peidoIndex',['message' => $message]);
+            return redirect()->route('pedidoIndex',['message' => $message]);
         }
-        return redirect()->route('peidoIndex',['message' => $message]);
+        return redirect()->route('pedidoIndex',['message' => $message]);
     }
 }
