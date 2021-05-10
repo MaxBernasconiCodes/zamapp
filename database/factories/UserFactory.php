@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'adress' => $this->faker->name,
             'country' => $this->faker->name,
             'remember_token' => Str::random(10),
-            'is_admin' => 1
+            'is_admin' => 0,
         ];
     }
 

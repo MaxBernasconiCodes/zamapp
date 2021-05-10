@@ -67,7 +67,7 @@
                 <div class="mt-4">
                     <x-jet-label for="isadmin">
                         <div class="flex items-center justify-center">
-                            <x-jet-checkbox name="is_admin" id="is_admin"/>
+                            <x-jet-checkbox name="is_admin" id="is_admin" :user="$user" />
                             <div class="ml-2">
                                 {!! __('¿ Este usuario debe ser ADMIN ?') !!}
                             </div>

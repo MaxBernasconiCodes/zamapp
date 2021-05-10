@@ -85,7 +85,7 @@ class UserManagementController extends Controller
             'country' => $request['country'],
             'name' => $request['name'],
             'email' => $request['email'],
-            'is_admin' => true,
+            'is_admin' => $request->has('is_admin') ? 1 : 0 ,
             'password' => Hash::make($request['password']),
         ]))
         {
@@ -135,8 +135,9 @@ class UserManagementController extends Controller
             'adress' => ['required', 'string', 'max:255'],
             'country' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
-            'is_admin' => ['string'],
+            'is_admin' => [],
         ])->validate();
+        $request['is_admin'] = $request->has('is_admin') ? 1 : 0;
         $user->update($request->all());
         return redirect()->route('userIndex');
     }
