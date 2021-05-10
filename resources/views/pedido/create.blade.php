@@ -8,9 +8,7 @@
     <x-jet-authentication-card>
 
         <x-slot name="logo">
-            <div class="mt-8">
-                <x-jet-authentication-card-logo />
-            </div>
+<!--no lo saco por que explota //TODO:reemplazar el componente-->
         </x-slot>
 
 
@@ -21,12 +19,12 @@
 
                 <div class="flex-row rounded-t">
                     <div class="bg-green-400 p-2 pt-0 rounded-t ">
-                        <h3 class="bg-yellow-200 font-bold p-1 mb-4 -mx-2 rounded-t">Empresa / Responsable  <a href="{{route('usersCreate')}}" class="bg-green-500 text-gray-50 rounded px-2 m-1"> + </a> </h3>
+                        <h3 class="bg-yellow-200 font-bold p-1 mb-4 -mx-2 rounded-t">Empresa // Responsable  <a href="{{route('usersCreate')}}" class="bg-green-500 text-gray-50 rounded px-2 m-1"> + </a> </h3>
                         <div class="mt-4 pt-4 inline">
                         <select  id="user_id" name="user_id" class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ">
-                            <option selected disabled>Elija una Empresa / Responsable</option>
+                            <option selected disabled>Elija una Empresa // Responsable</option>
                             @forelse($usuarios as $usuario)
-                            <option value="{{$usuario->id}}">{{$usuario->business}} / {{$usuario->name}}</option>
+                            <option value="{{$usuario->id}}">{{$usuario->business}} // {{$usuario->name}}</option>
                             @empty<option disabled value="-1">Sin usuarios</option>
                             @endforelse
                         </select>

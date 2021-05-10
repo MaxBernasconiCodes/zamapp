@@ -64,7 +64,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        $usuarios = User::all();
+        $usuarios = User::where('is_admin', 0)->orderBy('business')->get();
         return view('pedido.create', compact('usuarios'));
     }
 
@@ -190,13 +190,13 @@ class PedidoController extends Controller
     public function destroy($id)
     {
         $pedido = Pedido::withTrashed()->findOrFail($id);
-        $message ='No se pudo realizar la operacion de eliminacion del pedido ' . $user->name ;
-        if (!$user->trashed()) {
-            $user->delete();
+        $message ='No se pudo realizar la operacion de eliminacion del pedido ' . $pedido->name ;
+        if (!$pedido->trashed()) {
+            $pedido->delete();
             $message = 'Pedido Eliminado Exitosamente';
         }
         else{
-            $user->restore();
+            $pedido->restore();
             $message="Reactivacion del pedido $pedido->id exitosa";
             return redirect()->route('peidoIndex',['message' => $message]);
         }
