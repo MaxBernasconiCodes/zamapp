@@ -20,8 +20,8 @@ Route::get('/', function () {
 Route::get('/test/user', 'App\Http\Controllers\TestController@singleUser')->name('factorySingleUser');
 Route::get('/test/admin', 'App\Http\Controllers\TestController@admin')->name('factoryAdmin');
 Route::get('/test/users/{amount}', 'App\Http\Controllers\TestController@lotsUsers')->name('factoryUsers');
-Route::get('/test/pedido', 'App\Http\Controllers\TestController@singlePedido');
-Route::get('/test/pedidos/{amount}', 'App\Http\Controllers\TestController@lotsPedidos');
+Route::get('/test/pedido', 'App\Http\Controllers\TestController@singlePedido')->name('factorySinglePedido');
+Route::get('/test/pedidos/{amount}', 'App\Http\Controllers\TestController@lotsPedidos')->name('factoryPedidos');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

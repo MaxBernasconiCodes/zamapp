@@ -23,10 +23,10 @@ class PedidoFactory extends Factory
     {
         return [
             //$this->faker->name,
-            'user_id' => $this->faker->numberBetween(1,15),
+            'user_id' => $this->faker->numberBetween(1,10),
             'agencia' => $this->faker->name,
             'despachante' => $this->faker->name,
-            'consolidacion' => $this->faker->name,
+            'consolidacion' => $this->faker->city,
             'destino' => $this->faker->city,
             'contenedores' => $this->faker->numberBetween(1,1000),
             'descripcion' => $this->faker->text(300),

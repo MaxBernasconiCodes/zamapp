@@ -15,8 +15,8 @@
 
             <!-- Tabla: Inicio -->
             <table class='mx-auto max-w-7xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
-                <caption class="p-1 mr-4 bg-green-800 text-green-200 rounded-t w-full"><a href="/pedidos/create" class="rounded-t w-full" ><button class="w-full rounded-t" ><i class="fas fa-plus  "></i></button></a><caption>
-
+                <caption class="p-1 mr-4 bg-green-800 text-green-200 font-bold  text-center rounded-t w-full sticky "><a href="/pedidos/create" class="rounded-t w-full" ><button class="w-full rounded-t" > + Agregar  </button></a><caption>
+                <?php echo $data->render(); ?>
                     <thead class="bg-gray-50">
                 <tr class="text-gray-600 text-left">
                     <th class="font-semibold text-sm uppercase px-6 py-4">
@@ -45,7 +45,11 @@
                 @empty
                 @endforelse
                 </tbody>
+                <tfoot>
+                
+                </tfoot>
             </table>
+           
 
         </div>
     </div>

@@ -15,7 +15,7 @@
 
             <!-- Tabla: Inicio -->
             <table class='mx-auto max-w-5xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
-                <caption class="p-1 mr-4 bg-green-800 text-green-200 rounded-t w-full"><a href="/users/create" class="rounded-t w-full" ><button class="w-full rounded-t" ><i class="fas fa-plus  "></i></button></a><caption>
+                <caption class="p-1 mr-4 bg-green-800 text-green-200 font-bold  text-center rounded-t w-full"><a href="/users/create" class="rounded-t w-full" ><button class="w-full rounded-t" >+</button></a><caption>
 
                 <thead class="bg-gray-50">
                 <tr class="text-gray-600 text-left">
@@ -23,7 +23,7 @@
                         Usuario<br>Empresa
                     </th>
                     <th class="font-semibold text-sm uppercase px-6 py-4">
-                        Contacto
+                        Contacto<br>Tel/email
                     </th>
                     <th class="font-semibold text-sm uppercase px-6 py-4 text-center">
                         Estado
@@ -43,11 +43,13 @@
                 <tr class="sm:cursor-pointer sm:select-none md:select-auto">
                     <td class="px-6 py-4">
                         <div class="flex items-center space-x-3 max-w-md overflow-auto">
+                            @if(!empty($usuario->photoid))
                             <div class="inline-flex w-10 h-10">
                                 <img loading="lazy" class='w-10 h-10 object-cover rounded-full' alt='IMG' src='/storage/logozam.svg' >
                             </div>
+                            @endif
                             <div>
-                                <p class="">
+                                <p class="font-bold">
                                     {{$usuario->name}}
                                 </p>
                                 <p class="text-gray-500 text-sm font-semibold tracking-wide">

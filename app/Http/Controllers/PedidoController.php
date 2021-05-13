@@ -21,22 +21,22 @@ class PedidoController extends Controller
         switch ($operation)
         {
             case 0:
-                $data = Pedido::orderByDesc('created_at')->get();
+                $data = Pedido::orderByDesc('created_at')->paginate(20);
                 $operacion = 'Activos';
                 $message = 'Mostrando solo los registros de Pedidos Activos';
                 break;
             case 1:
-                $data = Pedido::withTrashed()->orderByDesc('created_at')->get();
+                $data = Pedido::withTrashed()->orderByDesc('created_at')->paginate(20);
                 $message = 'Mostrando todos los registros de Pedidos';
                 $operacion = 'Todos';
                 break;
             case 2:
-                $data = Pedido::onlyTrashed()->orderByDesc('created_at')->get();
+                $data = Pedido::onlyTrashed()->orderByDesc('created_at')->paginate(20);
                 $operacion = 'Eliminados';
                 $message = 'Mostrando los registros de Pedidos Eliminados';
                 break;
             case 3:
-                $data = Pedido::withTrashed()->orderByDesc('created_at')->get();
+                $data = Pedido::withTrashed()->orderByDesc('created_at')->paginate(20);
                 if(!empty($pedido_nro))
                 {
                     $data = $data->where('pedido_nro', 'LIKE', '%'.$pedido_nro.'%')->get();

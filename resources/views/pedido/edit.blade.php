@@ -1,13 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-           Usuario: {{ $user->name }}
-            @if(!$user->trashed())
-                @if(\Illuminate\Support\Facades\Auth::user()->id != $user->id)
-                <form id="delete_{{$user->id}}" action="{{url('/users/delete/'.$user->id)}}" method="POST" class="inline"  >@csrf @method('DELETE') <button class="bg-red-800 text-red-200   font-semibold px-2 rounded-r-full  ">Eliminar</button></form>
-                @endif
+           Pedido N°: {{ $pedido->pedido_nro }}<br>
+           Usuario: {{$pedido->usuario->name}}
+            @if(!$pedido->trashed())
+                <form id="delete_{{$pedido->id}}" action="{{url('/pedidos/delete/'.$pedido->id)}}" method="POST" class="inline"  >@csrf @method('DELETE') <button class="bg-red-800 text-red-200   font-semibold px-2 rounded-r-full  ">Eliminar</button></form>
             @else
-                <form id="reactivate_{{$user->id}}" action="{{url('/users/delete/'.$user->id)}}" method="POST" class="inline">@csrf @method('DELETE') <button class="bg-yellow-800 text-yellow-200   font-semibold px-2 rounded-r-full  ">Reactivar</button></form>
+                <form id="reactivate_{{$pedido->id}}" action="{{url('/pedidos/delete/'.$pedido->id)}}" method="POST" class="inline">@csrf @method('DELETE') <button class="bg-yellow-800 text-yellow-200   font-semibold px-2 rounded-r-full  ">Reactivar</button></form>
             @endif
 
         </h2>
@@ -21,7 +20,7 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('usersModify',['id' => $user->id])}}">
+        <form method="POST" action="{{ route('pedidosModify',['id' => $pedido->id])}}">
             @csrf
             @method('PATCH')
             <div>
@@ -74,6 +73,13 @@
                         </div>
                     </x-jet-label>
                 </div>
+                <form wire:submit.prevent="save">
+                    <input type="file" wire:model="docupload" multiple>
+                    <div wire:loading wire:target="docupload">Cargando...</div>
+                    @error('docupload') <span class="error">{{ $message }}</span> @enderror
+
+                    <button type="submit">Agregar Documento</button>
+                </form>
 
                 <div class="flex items-center justify-center mt-4">
                     <x-jet-button >
