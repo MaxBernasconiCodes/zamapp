@@ -15,9 +15,10 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($operation = 0, $message = '', $search = '')
+    public function index($operation = 0, $message = '')
     {
         $usuarios = User::withTrashed()->get();
+        $clientes = User::withTrashed()->where('is_admin', '0')->get();
         switch ($operation)
         {
             case 0:
@@ -35,27 +36,28 @@ class PedidoController extends Controller
                 $operacion = 'Eliminados';
                 $message = 'Mostrando los registros de Pedidos Eliminados';
                 break;
-            case 3:
-                $data = Pedido::withTrashed()->orderByDesc('created_at')->paginate(20);
-                if(!empty($pedido_nro))
-                {
-                    $data = $data->where('pedido_nro', 'LIKE', '%'.$pedido_nro.'%')->get();
-                }
-                if(!empty($barco_nro_booking))
-                {
-                    $data = $data->where('pedido_nro', 'LIKE', '%'.$barco_nro_booking.'%')->get();
-                }
-                break;
             default:
-                $data = Pedido::withTrashed()->where();
+                $data = Pedido::orderByDesc('created_at')->paginate(20);
                 $operacion = 'Activos';
-
                 break;
 
         }
 
-        return view('pedido.index', compact(['data','usuarios','operacion','message']));
+        return view('pedido.index', compact(['data','usuarios','operacion','message','clientes']));
     }
+
+    public function busqueda(Request $request)
+    {
+        $data = [];
+        $usuarios = User::withTrashed()->get();
+        $clientes = User::where('is_admin', '=', '0');
+        $operacion = 0;
+        $message = 'Mostrando resultados filtrados';
+        $data = $this->filter($request);
+
+        return view('pedido.index', compact(['data','usuarios','operacion','message','clientes']));
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -144,8 +146,9 @@ class PedidoController extends Controller
      */
     public function edit($id)
     {
+        $usuarios = User::where('is_admin', 0)->orderBy('business')->get();
         $pedido = Pedido::withTrashed()->findOrFail($id);
-        return view('user.edit', compact('pedido'));
+        return view('pedido.edit', compact(['pedido', 'usuarios']));
     }
 
     /**
@@ -201,5 +204,27 @@ class PedidoController extends Controller
             return redirect()->route('pedidoIndex',['message' => $message]);
         }
         return redirect()->route('pedidoIndex',['message' => $message]);
+    }
+
+    public function filter (Request $request) {
+        
+        $query = Pedido::all();
+        if($request->has('semana_salida'))
+        {
+            $query->where('semana_salida', $request['semana_salida']);
+        }
+ 
+        if($request->has('user_id'))
+        {
+
+            $query->where('user_id', $request['user_id']);
+        }
+ 
+        if($request->has('estado'))
+        {
+            $query->where('estado', $request['estado']);
+        }
+        
+        return $query;
     }
 }

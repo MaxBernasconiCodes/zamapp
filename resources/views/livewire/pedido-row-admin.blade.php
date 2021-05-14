@@ -16,7 +16,7 @@
             <label>{{$pedido->barco_nro_contenedor}}</label>
         </td>
         <td class="p-1">
-            @if($pedido->estado == 1)
+        @if($pedido->estado == 1)
                 <button class="rounded w-full p-2 bg-yellow-100 ">Preparacion</button>
         @elseif($pedido->estado == 2)
                 <button class="rounded w-full p-2 bg-yellow-300 ">In Transit</button>
@@ -26,7 +26,7 @@
                 <button class="rounded w-full p-2 bg-red-600 text-gray-50">Sin Estado</button>
         @endif
         <td class="p-1">
-            <form id="edit_{{$pedido->id}}" action="{{url('/pedidos/edit/'.$pedido->id)}}" method="POST" class="inline">@csrf <button class="bg-blue-800 text-blue-200   font-semibold px-2 rounded-l-full  ">Editar</button></form>
+            <form id="edit_{{$pedido->id}}" action="{{url('/pedidos/edit/'.$pedido->id)}}" method="GET" class="inline">@csrf <button class="bg-blue-800 text-blue-200   font-semibold px-2 rounded-l-full  ">Editar</button></form>
             @if(!$pedido->trashed())
                     <form id="delete_{{$pedido->id}}" action="{{url('/pedidos/delete/'.$pedido->id)}}" method="POST" class="inline">@csrf @method('DELETE') <button class="bg-red-800 text-red-200   font-semibold px-2 rounded-r-full  ">Eliminar</button></form>
             @else

@@ -38,7 +38,7 @@ class UserManagementController extends Controller
                 $message = 'Mostrando los registros de Usuarios Eliminados';
                 break;
             default:
-                $data = User::withTrashed()->where();
+                $data = User::all();
                 $operacion = 'Activos';
 
                 break;

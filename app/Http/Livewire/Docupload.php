@@ -9,8 +9,7 @@ class Docupload extends Component
 {
     use WithFileUploads;
 
-    public $documents;
-    public 
+    public $documents; 
 
     public function save()
     {
