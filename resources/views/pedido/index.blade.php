@@ -90,7 +90,7 @@
                 <tbody class="divide-y divide-gray-200">
                 <!-- Tabla por cada usuario de data -->
                 @forelse($data as $pedido)
-                    <livewire:pedido-row-admin :pedido="$pedido"/>
+                    <livewire:pedido-row-admin :pedido="$pedido" :usuarios="$usuarios"/>
                 @empty
                 @endforelse
                 </tbody>

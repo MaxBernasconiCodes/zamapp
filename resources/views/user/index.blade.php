@@ -1,15 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Administracion de Usuarios: ') }}<a href="/users/index/1" class="hover:text-green-600 hover:underline"> <p class="inline @if($operacion == 'Todos') text-green-800 underline @endif " >Todos</p></a> | <a href="/users/index/0" class="hover:text-green-600 hover:underline"> <p class="inline @if($operacion == 'Activos') text-green-800 underline @endif ">Activos</p></a> | <a href="/users/index/2" class="hover:text-red-600  hover:underline"> <p class="inline @if($operacion == 'Eliminados') text-red-800 underline @endif ">Eliminados</a>
+            {{ __('Administracion de Usuarios: ') }}
+            <a href="/users/index/1" class="hover:text-green-600 hover:underline"> 
+            <p class="inline @if($operacion == 'Todos') text-green-800 underline @endif " >Todos</p></a> | 
+            <a href="/users/index/0" class="hover:text-green-600 hover:underline"> 
+            <p class="inline @if($operacion == 'Activos') text-green-800 underline @endif ">Activos</p></a> | <a href="/users/index/2" class="hover:text-red-600  hover:underline"> <p class="inline @if($operacion == 'Eliminados') text-red-800 underline @endif ">Eliminados</a>
         </h2>
     </x-slot>
     @if($message != '')
     <livewire:alert.message :message="$message" />
     @endif
 
-    <div class="h-auto flex mt-8 px-4">
-
+    <div class="h-auto flex mt-8 px-4"> 
 
         <div class='overflow-x-auto w-full'>
 
