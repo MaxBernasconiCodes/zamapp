@@ -35,7 +35,7 @@ Route::group(['middleware'=>'admins'],function(){
     Route::get('/users/index/{operation?}','App\Http\Controllers\UserManagementController@index')->name('userIndex');
     Route::get('/users/create','App\Http\Controllers\UserManagementController@create')->name('usersCreate');
     Route::post('/users','App\Http\Controllers\UserManagementController@store')->name('usersRegister');
-    //Route::get('/users/show/{id}','App\Http\Controllers\UserManagementController@show')->name('usersShow');
+    Route::get('/users/show/{id}','App\Http\Controllers\UserManagementController@show')->name('usersShow');
     Route::get('/users/edit/{id}','App\Http\Controllers\UserManagementController@edit')->name('usersEdit');
     Route::patch('/users/update/{id}','App\Http\Controllers\UserManagementController@update')->name('usersModify');
     Route::delete('/users/delete/{id}','App\Http\Controllers\UserManagementController@destroy')->name('usersDelete');

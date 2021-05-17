@@ -7,7 +7,7 @@
                                 <img loading="lazy" class='w-10 h-10 object-cover rounded-full' alt='IMG' src='/storage/logozam.svg' >
                             </div>
                             @endif
-                            <div>
+                            <a href="{{route('usersShow', $usuario->id)}}">
                                 <p class="font-bold">
                                     {{$usuario->name}}
                                 </p>
@@ -15,6 +15,8 @@
                                     {{$usuario->business}}
                                 </p>
                             </div>
+                            </a>
+                            <div>
                         </div>
                     </td>
                     <td class="px-6 py-4" >

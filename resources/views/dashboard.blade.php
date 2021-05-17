@@ -7,8 +7,20 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
+            <div class="bg-white overflow-hidden shad14o0.w-xl sm:rounded-lg">
+                @if(Auth::user()->is_admin)
+                <div class="flex max-w-7xl justify-evenly">
+                    <div class="p-2">
+                        <h2 class=" text-center text-xl text-black">Accesos Rapidos</h2>
+                    </div>
+                    <div class="p-2">
+                        <h2 class=" text-center text-xl text-black">Usuarios</h2>
+
+                    </div>
+                </div>
+                @else
+                <h2>User</h2>
+                @endif
             </div>
         </div>
     </div>

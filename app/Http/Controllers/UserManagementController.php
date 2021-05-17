@@ -99,12 +99,13 @@ class UserManagementController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\UserManagement  $userManagement
+     * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(UserManagement $userManagement)
+    public function show($id)
     {
-        return view('user.show');
+        $user = User::with('pedidos')->findOrFail($id);
+        return view('user.show', compact('user'));
     }
 
     /**

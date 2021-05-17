@@ -14,11 +14,8 @@
     </x-slot>
 
     <x-jet-authentication-card>
-
         <x-slot name="logo">
         </x-slot>
-
-
         <x-jet-validation-errors class="mb-4" />
 
         <form method="POST" action="{{ route('usersModify',['id' => $user->id])}}">
