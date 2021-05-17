@@ -22,6 +22,7 @@ class PedidoController extends Controller
         $filtros['semana_salida'] = null;
         $filtros['user_id'] = null;
         $filtros['estado'] = null;
+        $filtros['query'] = null;
         
         
         
@@ -66,10 +67,7 @@ class PedidoController extends Controller
                 }
 
                 $data = $data->paginate(20);
-        
-
                 break;
-
         }
 
 

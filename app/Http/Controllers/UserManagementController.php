@@ -24,21 +24,21 @@ class UserManagementController extends Controller
         switch ($operation)
         {
             case 0:
-                $data = User::orderByDesc('created_at')->get();                $operacion = 'Activos';
+                $data = User::orderByDesc('created_at')->paginate(20);                $operacion = 'Activos';
                 $message = 'Mostrando solo los registros de Usuarios Activos';
                 break;
             case 1:
-                $data = User::withTrashed()->orderByDesc('created_at')->get();
+                $data = User::withTrashed()->orderByDesc('created_at')->paginate(20);
                 $message = 'Mostrando todos los registros de Usuario';
                 $operacion = 'Todos';
                 break;
             case 2:
-                $data = User::onlyTrashed()->orderByDesc('created_at')->get();
+                $data = User::onlyTrashed()->orderByDesc('created_at')->paginate(20);
                 $operacion = 'Eliminados';
                 $message = 'Mostrando los registros de Usuarios Eliminados';
                 break;
             default:
-                $data = User::all();
+                $data = User::all()->orderByDesc('created_at')->paginate(20);
                 $operacion = 'Activos';
 
                 break;

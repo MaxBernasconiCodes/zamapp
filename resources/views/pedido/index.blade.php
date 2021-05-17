@@ -13,9 +13,7 @@
                 <p class="inline @if($operacion == 'Activos') text-green-800 underline @endif ">Activos</p></a> | 
             <a href="{{route('pedidoIndex')}}/2" class="hover:text-red-600  hover:underline"> 
                 <p class="inline @if($operacion == 'Eliminados') text-red-800 underline @endif ">Eliminados</a>
-        </div>
-        <livewire:searchbar></livewire:searchbar> 
-        
+        </div>     
 
     </div> 
     <div>
