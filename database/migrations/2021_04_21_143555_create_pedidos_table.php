@@ -22,7 +22,7 @@ class CreatePedidosTable extends Migration
             $table->text('destino');
             $table->integer('contenedores');
             $table->text('descripcion');
-            $table->text('pedido_nro');
+            $table->integer('pedido_nro')->unique();
             $table->text('semana_salida');
             $table->date('fecha_cortedocumental');
             $table->date('fecha_cortefisico');

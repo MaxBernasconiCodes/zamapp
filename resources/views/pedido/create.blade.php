@@ -16,8 +16,18 @@
 
         <form method="POST" action="{{ route('pedidoRegister') }}">
             @csrf
-
                 <div class="flex-row rounded-t">
+                <div class="bg-green-400 px-2 rounded ">
+                            <h3 class="bg-yellow-200 font-bold p-1 mt-4 -mx-2 rounded">Estado</h3>
+                    <div class="mt-4 flex-col">
+                        <select id="estado" name="estado" required class="mb-3 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <option value="0" selected disabled>Seleccione un estado</option>
+                            <option value="1" class="bg-yellow-100">Preparacion</option>
+                            <option value="2" class="bg-yellow-300">In Transit</option>
+                            <option value="3" class="bg-green-600 text-gray-50">Entregado</option>
+                        </select>
+                    </div>
+                    </div>
                     <div class="bg-green-400 p-2 pt-0 rounded-t ">
                         <h3 class="bg-yellow-200 font-bold p-1 mb-4 -mx-2 rounded-t">Empresa // Responsable  <a href="{{route('usersCreate')}}" class="bg-green-500 text-gray-50 rounded px-2 m-1"> + </a> </h3>
                         <div class="mt-4 pt-4 inline">
@@ -29,6 +39,15 @@
                             @endforelse
                         </select>
                         </div>
+                        <div class="mt-4 flex-col">
+                        <x-jet-label for="pedido_nro" value="{{ __('Numero de pedido') }}" />
+                        <x-jet-input id="pedido_nro" class="block mt-1 w-full" type="number" name="pedido_nro" min="0" step="1" :value="old('pedido_nro', $nextnumber)" required />
+                </div>
+
+                <div class="mt-4 flex-col">
+                        <x-jet-label for="semana_salida" value="{{ __('Semana de Salida') }}" />
+                        <x-jet-input id="semana_salida" class="block mt-1 w-full" type="week" name="semana_salida" :value="old('semana_salida', date('Y').'-W'.date('W'))"  required />
+                </div>
                     </div>
                 </div>
 
@@ -37,7 +56,7 @@
 
                     <div class="bg-green-200 px-2 rounded ">
                     <h3 class="bg-yellow-200 font-bold p-1 -m-2 rounded">Agencia</h3>
-                    <hr>
+                    
                     <div class="mt-4 flex-col">
                         <x-jet-label for="agencia" value="{{ __('Agencia') }}" />
                         <x-jet-input id="agencia" class="block mt-1 w-full" type="text" name="agencia" :value="old('agencia')" required />
@@ -67,15 +86,6 @@
                         <x-jet-label for="descripcion" value="{{ __('Descripcion') }}" />
                         <x-jet-input id="descripcion" class="block mt-1 w-full" type="text" rows="3" name="descripcion" :value="old('descripcion')" required />
                     </div>
-                    <div class="mt-4 flex-col">
-                        <x-jet-label for="pedido_nro" value="{{ __('Numero de pedido') }}" />
-                        <x-jet-input id="pedido_nro" class="block mt-1 w-full" type="text" name="pedido_nro" :value="old('pedido_nro')" required />
-                    </div>
-
-                    <div class="mt-4 flex-col">
-                        <x-jet-label for="semana_salida" value="{{ __('Semana de Salida') }}" />
-                        <x-jet-input id="semana_salida" class="block mt-1 w-full" type="week" name="semana_salida" :value="old('semana_salida', date('Y').'-W'.date('W'))"  required />
-                    </div>
 
                     <div class="mt-4 flex-col">
                         <x-jet-label for="fecha_cortedocumental" value="{{ __('Fecha de corte documental') }}" />
@@ -89,7 +99,7 @@
                             <h3 class="bg-yellow-200 font-bold p-1  mt-4 -mx-2 rounded">Barco</h3>
                     <hr>
                     <div class="mt-4 flex-col">
-                        <x-jet-label for="barco_nombre" value="{{ __('Nombre del Barco') }}" />
+                        <x-jet-label for="barco_nom bre" value="{{ __('Nombre del Barco') }}" />
                         <x-jet-input id="barco_nombre" class="block mt-1 w-full" type="text" name="barco_nombre" :value="old('barco_nombre')" required />
                     </div>
                     <div class="mt-4 flex-col">
@@ -113,18 +123,7 @@
                         <x-jet-input id="fecha_destino"  class="block mt-1  w-full" type="date" name="fecha_destino" :value="old('fecha_destino', date('Y-m-d'))" required />
                     </div>
                     </div>
-                        <div class="bg-green-400 px-2 rounded ">
-                            <h3 class="bg-yellow-200 font-bold p-1 mt-4 -mx-2 rounded">Estado</h3>
-                    <div class="mt-4 flex-col">
-                        <select id="estado" name="estado" required class="mb-3 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                            <option value="0" selected disabled>Seleccione un estado</option>
-                            <option value="1" class="bg-yellow-100">Preparacion</option>
-                            <option value="2" class="bg-yellow-300">In Transit</option>
-                            <option value="3" class="bg-green-600 text-gray-50">Entregado</option>
-                        </select>
-                    </div>
-                    </div>
-                    <br>
+                    
                     <hr>
                 </div>
             </div>

@@ -1,13 +1,13 @@
 <div>
     <tr>
-        <td class="p-2 cursor-pointer">
+        <td class="px-6 py-4 cursor-pointer">
         <a href="{{route('pedidoEdit', $pedido->id)}}">
             <label class="cursor-pointer"><strong>{{$pedido->pedido_nro}}</strong></label>
             <br>
             <label class="cursor-pointer">{{$pedido->semana_salida}}</label>
         </td>
         </a>
-        <td class="p-2 cursor-pointer">
+        <td class="px-6 py-4 cursor-pointer">
             
             @if(!is_Null($pedido->user))
             <a href="{{route('usersEdit', $pedido->user_id)}}">
@@ -17,17 +17,17 @@
             </a>
             @else
             <label><strong>
-            {{$cliente->business}}</strong></label>
+            {{$clientes->where('id', $pedido->user_id)->first()->business}}</strong></label>
             <br>
-            <label>{{$cliente->name}}</label>
+            <label>{{$clientes->where('id', $pedido->user_id)->first()->name}}</label>
             @endif
         </td>
-        <td class="p-2">
+        <td class="px-6 py-4">
             <label>{{$pedido->barco_nombre}}</label>
             <br>
             <label>{{$pedido->barco_nro_contenedor}}</label>
         </td>
-        <td class="p-1">
+        <td class="px-6 py-4">
         <a href="{{route('pedidoEdit', $pedido->id)}}">
         @if($pedido->estado == 1)
                 <button class="rounded w-full p-2 bg-yellow-100 ">Preparacion</button>
@@ -39,13 +39,15 @@
                 <button class="rounded w-full p-2 bg-red-600 text-gray-50">Sin Estado</button>
         @endif
         </a>
-        <td class="p-1">
-            <form id="edit_{{$pedido->id}}" action="{{url('/pedidos/edit/'.$pedido->id)}}" method="GET" class="inline">@csrf <button class="bg-blue-800 text-blue-200   font-semibold px-2 rounded-l-full  ">Editar</button></form>
+        <td>
+        <div class="flex flex-wrap justify-around rounded py-2">
+            <a href="{{route('pedidoEdit', $pedido->id)}}" class="text-center rounded w-1/2 bg-blue-800 text-blue-200 p-2">Editar</a>
             @if(!$pedido->trashed())
-                    <form id="delete_{{$pedido->id}}" action="{{url('/pedidos/delete/'.$pedido->id)}}" method="POST" class="inline">@csrf @method('DELETE') <button class="bg-red-800 text-red-200   font-semibold px-2 rounded-r-full  ">Eliminar</button></form>
+            <form action="{{route('pedidoDelete', $pedido->id)}}" class="flex rounded w-1/2" method="POST"> @csrf @method('DELETE') <button class="w-full rounded bg-red-800 text-red-200 p-2">Eliminar</button></form>
             @else
-                <form id="reactivate_{{$pedido->id}}" action="{{url('/pedidos/delete/'.$pedido->id)}}" method="POST" class="inline">@csrf @method('DELETE') <button class="bg-yellow-800 text-yellow-200   font-semibold px-2 rounded-r-full  ">Reactivar</button></form>
+            <form action="{{route('pedidoDelete', $pedido->id)}}" class=" flex rounded w-1/2" method="POST"> @csrf @method('DELETE') <button class=" w-full rounded bg-yelow-800  text-yellow-200 p-2">Reactivar</button></form>
             @endif
+        </div>
         </td>
     </tr>
 </div>

@@ -1,15 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-           Pedido N°: {{ $pedido->pedido_nro }}<br>
-           Usuario: {{$pedido->user->name}}
-            @if(!$pedido->trashed())
-                <form id="delete_{{$pedido->id}}" action="{{url('/pedidos/delete/'.$pedido->id)}}" method="POST" class="inline"  >@csrf @method('DELETE') <button class="bg-red-800 text-red-200   font-semibold px-2 rounded-r-full  ">Eliminar</button></form>
+           Pedido N°: {{ $pedido->pedido_nro }} / Usuario: {{$pedido->user->name}}</h2>
+           @if(!$pedido->trashed())
+            <form action="{{route('pedidoDelete', $pedido->id)}}" class="rounded inline" method="POST"> @csrf @method('DELETE') <button class="rounded bg-red-800 text-red-200 p-2">Eliminar</button></form>
             @else
-                <form id="reactivate_{{$pedido->id}}" action="{{url('/pedidos/delete/'.$pedido->id)}}" method="POST" class="inline">@csrf @method('DELETE') <button class="bg-yellow-800 text-yellow-200   font-semibold px-2 rounded-r-full  ">Reactivar</button></form>
+            <form action="{{route('pedidoDelete', $pedido->id)}}" class="rounded inline" method="POST"> @csrf @method('DELETE') <button class=" w-full rounded bg-yelow-800  text-yellow-200 p-2">Reactivar</button></form>
             @endif
-
-        </h2>
     </x-slot>
 
     <x-jet-authentication-card>
@@ -25,7 +22,7 @@
             @method('PATCH')
             <div class="flex-row rounded-t">
             <div class="bg-green-400 px-2 rounded ">
-                            <h3 class="bg-yellow-200 font-bold p-1 mt-4 -mx-2 rounded">Estado</h3>
+                            <h3 class="bg-yellow-200 font-bold p-2 mt-4 -mx-2 rounded">Estado</h3>
                     <div class="mt-4 flex-col">
             <select id="estado" name="estado" required class="mb-3 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                             <option  @if($pedido->estado == 1) selected @endif value="1" class="bg-yellow-100">Preparacion</option>
@@ -36,7 +33,7 @@
             </div>
 
                     <div class="bg-green-400 p-2 pt-0 rounded-t ">
-                        <h3 class="bg-yellow-200 font-bold p-1 mb-4 -mx-2 rounded-t">Empresa // Responsable  <a href="{{route('usersCreate')}}" class="bg-green-500 text-gray-50 rounded px-2 m-1"> + </a> </h3>
+                        <h3 class="bg-yellow-200 font-bold p-2 mb-4 -mx-2 rounded-t">Empresa // Responsable  <a href="{{route('usersCreate')}}" class="bg-green-500 text-gray-50 rounded px-2 m-1"> + </a> </h3>
                         <div class="mt-4 pt-4 inline">
                         <select  id="user_id" name="user_id" class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ">                            @forelse($usuarios as $usuario)
                             <option @if($pedido->user_id == $usuario->id) selected @endif value="{{$usuario->id}}">{{$usuario->business}} // {{$usuario->name}}</option>
@@ -44,6 +41,10 @@
                             @endforelse
                         </select>
                         </div>
+                        <div class="mt-4 flex-col">
+                        <x-jet-label for="semana_salida" value="{{ __('Semana de Salida') }}" />
+                        <x-jet-input id="semana_salida" class="block mt-1 w-full" type="week" name="semana_salida" :value="old('semana_salida', date('Y').'-W'.date('W'))"  required />
+                </div>
                     </div>
                 </div>
 
@@ -51,8 +52,7 @@
                 <div class="flex-row mt-2 ">
 
                     <div class="bg-green-200 px-2 rounded ">
-                    <h3 class="bg-yellow-200 font-bold p-1 -m-2 rounded">Agencia</h3>
-                    <hr>
+                    <h3 class="bg-yellow-200 font-bold p-2 -m-2 rounded">Agencia</h3>
                     <div class="mt-4 flex-col">
                         <x-jet-label for="agencia" value="{{ __('Agencia') }}" />
                         <x-jet-input id="agencia" class="block mt-1 w-full" type="text" name="agencia" :value="old('agencia', $pedido->agencia)" required />
@@ -83,11 +83,6 @@
                         <x-jet-input id="descripcion" class="block mt-1 w-full" type="text" rows="3" name="descripcion" :value="old('descripcion', $pedido->descripcion)" required />
                     </div>
                     <div class="mt-4 flex-col">
-                        <x-jet-label for="pedido_nro" value="{{ __('Numero de pedido') }}" />
-                        <x-jet-input id="pedido_nro" class="block mt-1 w-full" type="text" name="pedido_nro" :value="old('pedido_nro', $pedido->pedido_nro)" required />
-                    </div>
-
-                    <div class="mt-4 flex-col">
                         <x-jet-label for="semana_salida" value="{{ __('Semana de Salida') }}" />
                         <x-jet-input id="semana_salida" class="block mt-1 w-full" type="week" name="semana_salida" :value="old('semana_salida', $pedido->semana_salida)"  required />
                     </div>
@@ -101,7 +96,7 @@
                         <x-jet-input id="fecha_cortefisico" class="block mt-1 w-full" type="date" name="fecha_cortefisico" :value="old('fecha_cortefisico', $pedido->fecha_cortefisico)" required />
                     </div>
                     <div class="bg-green-300 px-2 rounded pb-4">
-                            <h3 class="bg-yellow-200 font-bold p-1  mt-4 -mx-2 rounded">Barco</h3>
+                            <h3 class="bg-yellow-200 font-bold p-2  mt-4 -mx-2 rounded">Barco</h3>
                     <hr>
                     <div class="mt-4 flex-col">
                         <x-jet-label for="barco_nombre" value="{{ __('Nombre del Barco') }}" />

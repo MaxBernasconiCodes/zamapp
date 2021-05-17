@@ -33,7 +33,7 @@
         <div class='overflow-x-auto w-full'>
 
         <!-- Tabla: Inicio -->
-        <table class='mx-auto max-w-7xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
+        <table class='mx-auto max-w-8xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
             <span class="p-1 mr-4 bg-green-800 text-green-200 font-bold  text-center rounded-t w-full"><a href="{{route('pedidoCreate')}}" class="rounded-t w-full" ><button class="w-full rounded-t" > + Agregar  </button></a><span>
 
             <thead class="bg-gray-50">
@@ -90,7 +90,7 @@
                 <tbody class="divide-y divide-gray-200">
                 <!-- Tabla por cada usuario de data -->
                 @forelse($data as $pedido)
-                    <livewire:pedido-row-admin :pedido="$pedido" :usuarios="$usuarios"/>
+                    <livewire:pedido-row-admin :pedido="$pedido" :usuarios="$usuarios" :clientes="$clientes"/>
                 @empty
                 @endforelse
                 </tbody>

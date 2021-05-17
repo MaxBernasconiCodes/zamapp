@@ -18,26 +18,26 @@ class PedidoController extends Controller
     public function index($operation = 0, $message = '')
     {
         $usuarios = User::withTrashed()->get();
-        $clientes = User::withTrashed()->where('is_admin', '0')->get();
+        $clientes = User::withTrashed()->where('is_admin', '0')->orderBy('business')->get();
         switch ($operation)
         {
             case 0:
-                $data = Pedido::orderByDesc('created_at')->paginate(20);
+                $data = Pedido::with('user')->orderByDesc('created_at')->paginate(20);
                 $operacion = 'Activos';
                 $message = 'Mostrando solo los registros de Pedidos Activos';
                 break;
             case 1:
-                $data = Pedido::withTrashed()->orderByDesc('created_at')->paginate(20);
+                $data = Pedido::with('user')->withTrashed()->orderByDesc('created_at')->paginate(20);
                 $message = 'Mostrando todos los registros de Pedidos';
                 $operacion = 'Todos';
                 break;
             case 2:
-                $data = Pedido::onlyTrashed()->orderByDesc('created_at')->paginate(20);
+                $data = Pedido::with('user')->onlyTrashed()->orderByDesc('created_at')->paginate(20);
                 $operacion = 'Eliminados';
                 $message = 'Mostrando los registros de Pedidos Eliminados';
                 break;
             default:
-                $data = Pedido::orderByDesc('created_at')->paginate(20);
+                $data = Pedido::with('user')->orderByDesc('created_at')->paginate(20);
                 $operacion = 'Activos';
                 break;
 
@@ -48,12 +48,26 @@ class PedidoController extends Controller
 
     public function busqueda(Request $request)
     {
-        $data = [];
-        $usuarios = User::withTrashed()->get();
+        $usuarios = User::withTrashed();
         $clientes = User::where('is_admin', '=', '0');
         $operacion = 0;
         $message = 'Mostrando resultados filtrados';
-        $data = $this->filter($request);
+        $data = Pedido::where('id','<','1' );
+        if($request->has('semana_salida'))
+        {
+            $data->where('semana_salida', $request->semana_salida);
+        }
+ 
+        if($request->has('user_id'))
+        {
+
+            $data->where('user_id', $request->user_id);
+        }
+ 
+        if($request->has('estado'))
+        {
+            $data->where('estado', $request->estado);
+        }
 
         return view('pedido.index', compact(['data','usuarios','operacion','message','clientes']));
     }
@@ -66,8 +80,10 @@ class PedidoController extends Controller
      */
     public function create()
     {
+        $nextnumber = Pedido::latest()->first()->pedido_nro;
+        $nextnumber++;
         $usuarios = User::where('is_admin', 0)->orderBy('business')->get();
-        return view('pedido.create', compact('usuarios'));
+        return view('pedido.create', compact(['usuarios','nextnumber']));
     }
 
     /**
@@ -86,7 +102,7 @@ class PedidoController extends Controller
             'destino' => ['required', 'string', 'max:255'],
             'contenedores' => ['required', 'integer'],
             'descripcion' => ['required', 'string', 'max:1000'],
-            'pedido_nro' => ['required', 'string'],
+            'pedido_nro' => ['required', 'unique:users', 'integer'],
             'semana_salida' => ['required', 'string'],
             'fecha_cortedocumental' => ['required','date'],
             'fecha_cortefisico' => ['required','date'],
@@ -169,8 +185,7 @@ class PedidoController extends Controller
             'destino' => ['required', 'string', 'max:255'],
             'contenedores' => ['required', 'integer'],
             'descripcion' => ['required', 'string', 'max:1000'],
-            'pedido_nro' => ['required', 'integer'],
-            'semana_salida' => ['required', 'integer'],
+            'semana_salida' => ['required', 'string'],
             'fecha_cortedocumental' => ['required','date'],
             'fecha_cortefisico' => ['required','date'],
             'barco_nombre' => ['required', 'string', 'max:255'],
@@ -206,25 +221,5 @@ class PedidoController extends Controller
         return redirect()->route('pedidoIndex',['message' => $message]);
     }
 
-    public function filter (Request $request) {
-        
-        $query = Pedido::all();
-        if($request->has('semana_salida'))
-        {
-            $query->where('semana_salida', $request['semana_salida']);
-        }
- 
-        if($request->has('user_id'))
-        {
-
-            $query->where('user_id', $request['user_id']);
-        }
- 
-        if($request->has('estado'))
-        {
-            $query->where('estado', $request['estado']);
-        }
-        
-        return $query;
-    }
+   
 }
