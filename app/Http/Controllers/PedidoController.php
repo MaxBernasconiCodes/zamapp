@@ -15,10 +15,16 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($operation = 0, $message = '')
+    public function index(Request $request, $operation = 0, $message = '')
     {
         $usuarios = User::withTrashed()->get();
         $clientes = User::withTrashed()->where('is_admin', '0')->orderBy('business')->get();
+        $filtros['semana_salida'] = null;
+        $filtros['user_id'] = null;
+        $filtros['estado'] = null;
+        
+        
+        
         switch ($operation)
         {
             case 0:
@@ -36,42 +42,39 @@ class PedidoController extends Controller
                 $operacion = 'Eliminados';
                 $message = 'Mostrando los registros de Pedidos Eliminados';
                 break;
-            default:
-                $data = Pedido::with('user')->orderByDesc('created_at')->paginate(20);
-                $operacion = 'Activos';
+            case 3:
+                $data = Pedido::withTrashed()->orderByDesc('created_at');
+                $message = 'Mostrando los resultados filtrados';
+                $operacion = 3;
+
+                if(!is_null($request->semana_salida))
+                {
+                $data =  $data->where('semana_salida', $request->semana_salida);
+                $filtros['semana_salida'] = $request->semana_salida;
+                }
+        
+                if(!is_null($request->user_id))
+                {
+                $data = $data->where('user_id', $request->user_id);
+                $filtros['user_id'] = $request->user_id;
+                }
+        
+                if(!is_null($request->estado))
+                {
+                $data = $data->where('estado', $request->estado);
+                $filtros['estado'] = $request->estado;
+                }
+
+                $data = $data->paginate(20);
+        
+
                 break;
 
         }
 
-        return view('pedido.index', compact(['data','usuarios','operacion','message','clientes']));
+
+        return view('pedido.index', compact(['data','usuarios','operacion','message','clientes','filtros']));
     }
-
-    public function busqueda(Request $request)
-    {
-        $usuarios = User::withTrashed();
-        $clientes = User::where('is_admin', '=', '0');
-        $operacion = 0;
-        $message = 'Mostrando resultados filtrados';
-        $data = Pedido::where('id','<','1' );
-        if($request->has('semana_salida'))
-        {
-            $data->where('semana_salida', $request->semana_salida);
-        }
- 
-        if($request->has('user_id'))
-        {
-
-            $data->where('user_id', $request->user_id);
-        }
- 
-        if($request->has('estado'))
-        {
-            $data->where('estado', $request->estado);
-        }
-
-        return view('pedido.index', compact(['data','usuarios','operacion','message','clientes']));
-    }
-
 
     /**
      * Show the form for creating a new resource.

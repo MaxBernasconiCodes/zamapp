@@ -16,6 +16,7 @@
 
         <form method="POST" action="{{ route('pedidoRegister') }}">
             @csrf
+            
                 <div class="flex-row rounded-t">
                 <div class="bg-green-400 px-2 rounded ">
                             <h3 class="bg-yellow-200 font-bold p-1 mt-4 -mx-2 rounded">Estado</h3>
@@ -54,7 +55,7 @@
 
                 <div class="flex-row mt-2 ">
 
-                    <div class="bg-green-200 px-2 rounded ">
+                    <div class="bg-green-200 px-2 pb-4 rounded ">
                     <h3 class="bg-yellow-200 font-bold p-1 -m-2 rounded">Agencia</h3>
                     
                     <div class="mt-4 flex-col">
@@ -95,6 +96,10 @@
                         <x-jet-label for="fecha_cortefisico" value="{{ __('Fecha de corte fisico') }}" />
                         <x-jet-input id="fecha_cortefisico" class="block mt-1 w-full" type="date" name="fecha_cortefisico" :value="old('fecha_cortefisico', date('Y-m-d'))" required />
                     </div>
+                    </div>
+
+                    <!-- Barco -->
+                    
                     <div class="bg-green-300 px-2 rounded pb-4">
                             <h3 class="bg-yellow-200 font-bold p-1  mt-4 -mx-2 rounded">Barco</h3>
                     <hr>

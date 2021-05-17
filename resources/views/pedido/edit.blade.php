@@ -20,6 +20,14 @@
         <form method="POST" action="{{ route('pedidoModify',['id' => $pedido->id])}}">
             @csrf
             @method('PATCH')
+
+            <div class="flex-row">
+                <div class="flex items-center justify-center mt-4">
+                    <x-jet-button >
+                        {{ __('Modificar Pedido') }}
+                    </x-jet-button>
+                </div>
+            </div>
             <div class="flex-row rounded-t">
             <div class="bg-green-400 px-2 rounded ">
                             <h3 class="bg-yellow-200 font-bold p-2 mt-4 -mx-2 rounded">Estado</h3>
@@ -51,7 +59,7 @@
 
                 <div class="flex-row mt-2 ">
 
-                    <div class="bg-green-200 px-2 rounded ">
+                    <div class="bg-green-200 px-2 pb-4 rounded ">
                     <h3 class="bg-yellow-200 font-bold p-2 -m-2 rounded">Agencia</h3>
                     <div class="mt-4 flex-col">
                         <x-jet-label for="agencia" value="{{ __('Agencia') }}" />
@@ -94,6 +102,8 @@
                     <div class="mt-4 flex-col">
                         <x-jet-label for="fecha_cortefisico" value="{{ __('Fecha de corte fisico') }}" />
                         <x-jet-input id="fecha_cortefisico" class="block mt-1 w-full" type="date" name="fecha_cortefisico" :value="old('fecha_cortefisico', $pedido->fecha_cortefisico)" required />
+                    </div>
+
                     </div>
                     <div class="bg-green-300 px-2 rounded pb-4">
                             <h3 class="bg-yellow-200 font-bold p-2  mt-4 -mx-2 rounded">Barco</h3>

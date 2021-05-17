@@ -45,7 +45,7 @@
             @if(!$pedido->trashed())
             <form action="{{route('pedidoDelete', $pedido->id)}}" class="flex rounded w-1/2" method="POST"> @csrf @method('DELETE') <button class="w-full rounded bg-red-800 text-red-200 p-2">Eliminar</button></form>
             @else
-            <form action="{{route('pedidoDelete', $pedido->id)}}" class=" flex rounded w-1/2" method="POST"> @csrf @method('DELETE') <button class=" w-full rounded bg-yelow-800  text-yellow-200 p-2">Reactivar</button></form>
+            <form action="{{route('pedidoDelete', $pedido->id)}}" class=" flex rounded w-1/2" method="POST"> @csrf @method('DELETE') <button class=" w-full rounded bg-yellow-800  text-yellow-200 p-2">Reactivar</button></form>
             @endif
         </div>
         </td>

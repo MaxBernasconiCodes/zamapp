@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request; 
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,7 @@ Route::group(['middleware'=>'admins'],function(){
     Route::delete('/users/delete/{id}','App\Http\Controllers\UserManagementController@destroy')->name('usersDelete');
     //Rutas de Pedidos
     Route::get('/pedidos/index/{operation?}','App\Http\Controllers\PedidoController@index')->name('pedidoIndex');
-    Route::get('/pedidos/filter}','App\Http\Controllers\PedidoController@busqueda')->name('filterPedidos');
+    Route::get('/pedidos/index/3','App\Http\Controllers\PedidoController@index')->name('filterPedidos');
     Route::get('/pedidos/create','App\Http\Controllers\PedidoController@create')->name('pedidoCreate');
     Route::post('/pedidos','App\Http\Controllers\PedidoController@store')->name('pedidoRegister');
     //Route::get('/users/show/{id}','App\Http\Controllers\PedidoController@show')->name('usersShow');

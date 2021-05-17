@@ -61,13 +61,13 @@
                 <form action="{{route('filterPedidos')}}" method="GET" id="search" name="search">
                 <tr>
                 <td>
-                    <input type="week" id="semana_salida" name="semana_salida">
+                    <input type="week" id="semana_salida" name="semana_salida" @if(!is_null($filtros['semana_salida'])) value={{$filtros['semana_salida']}} @endif >
                 </td>
                 <td>                        
                     <select id="user_id" name="user_id">
-                        <option disabled selected>Elija un cliente</option>
+                        <option disabled @if($filtros['user_id'] == null) selected @endif >Elija un cliente</option>
                         @forelse($clientes as $cliente)
-                        <option value="{{$cliente->id}}">{{$cliente->business}}</option>
+                        <option value="{{$cliente->id}}" @if(!is_null($filtros['user_id']) && $filtros['user_id'] == $cliente->id) selected @endif >{{$cliente->business}}</option>
                         @empty
                         <option disabled >Sin registros</option>
                         @endforelse
@@ -76,20 +76,21 @@
                 <td></td>
                 <td>             
                     <select id="estado" name="estado" required class="mb-3 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                            <option value="0" selected disabled>Seleccione un estado</option>
-                            <option value="1" class="bg-yellow-100">Preparacion</option>
-                            <option value="2" class="bg-yellow-300">In Transit</option>
-                            <option value="3" class="bg-green-600 text-gray-50">Entregado</option>
+                            <option disabled @if(is_null($filtros['estado'])) selected @endif >Seleccione un estado</option>
+                            <option value="1" @if($filtros['estado'] == 1) selected @endif class="bg-yellow-100">Preparacion</option>
+                            <option value="2" @if($filtros['estado'] == 2) selected @endif class="bg-yellow-300">In Transit</option>
+                            <option value="3" @if($filtros['estado'] == 3) selected @endif class="bg-green-600 text-gray-50">Entregado</option>
                     </select>
                 </td>
-                <td><input type="submit" class="rounded bg-green-800 mb-4 p-2 text-gray-50 w-full" value="Filtrar"></td>
+                <td><input type="submit" class="rounded bg-green-800 mb-4 p-2 text-green-50 w-1/2" value="Filtrar">
+                    <a  href="{{route('pedidoIndex')}}" class="rounded bg-gray-800 mb-4 p-2 text-gray-50 w-1/2" value="Limpiar">Resetear</a></td>
                 </tr>
                 </form>
             </thead>
                 <!-- Tabla: Cuerpo -->
                 <tbody class="divide-y divide-gray-200">
-                <!-- Tabla por cada usuario de data -->
-                @forelse($data as $pedido)
+                <!-- Tabla por cada usuario de data  -->
+                 @forelse($data as $pedido)
                     <livewire:pedido-row-admin :pedido="$pedido" :usuarios="$usuarios" :clientes="$clientes"/>
                 @empty
                 @endforelse
