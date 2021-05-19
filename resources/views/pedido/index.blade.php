@@ -17,9 +17,6 @@
 
     </div> 
     <div>
-    <div>
-        <?php echo $data->render(); ?>
-        </div>
     </div>
         
 
@@ -31,9 +28,11 @@
         <div class='overflow-x-auto w-full'>
 
         <!-- Tabla: Inicio -->
+        <div class="float-right relative right-1 ">
+        
+        </div>
         <table class='mx-auto max-w-8xl w-full whitespace-nowrap rounded-lg bg-white divide-y divide-gray-300 overflow-hidden'>
-            <span class="p-1 mr-4 bg-green-800 text-green-200 font-bold  text-center rounded-t w-full"><a href="{{route('pedidoCreate')}}" class="rounded-t w-full" ><button class="w-full rounded-t" > + Agregar  </button></a><span>
-
+        
             <thead class="bg-gray-50">
                 @csrf
                 <tr class="text-gray-600 text-left">
@@ -52,8 +51,8 @@
                         Estado
 
                     </th>
-                    <th class="font-semibold text-sm uppercase px-6 py-4">
-                        Acciones
+                    <th class="font-semibold">
+                    @livewire('addbutton', ['href' => route('pedidoCreate')])
                     </th>
                 </tr>
                 <form action="{{route('filterPedidos')}}" method="GET" id="search" name="search">
@@ -94,6 +93,9 @@
                 @endforelse
                 </tbody>
             </table>
+            <div class="flex justify-center align-middle  p-1">
+                 <?php echo $data->render(); ?>
+                </div>
             
 
         </div>

@@ -32,15 +32,15 @@
 
         </style>
     </head>
-    <body class="bg-gray-100 dark:bg-gray-900">
-    <div class="h-screen">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-screen">
-            <div class="overflow-hidden shadow-xl sm:rounded-lg h-screen">
+    <body class="flex align-middle justify-center bg-gray-100 dark:bg-gray-600">
+    <div class="flex align-middle justify-center h-screen">
+        <div class=" flex align-middle justify-center max-w-7xl mx-auto sm:px-6 lg:px-8 h-screen">
+            <div class="flex align-middle justify-center overflow-hidden shadow-xl sm:rounded-lg h-screen">
                 @if (Route::has('login'))
-                    <div class="flex justify-center pt-8 border-2 border-white rounded-full">
+                    <div class="flex h-screen justify-center align-middle pt-8 border-2 border-white rounded-full">
                         @auth
                             <a href="{{ url('/dashboard') }}" class="text-sm text-gray-500">
-                            <div id="logo" class="flex justify-center pt-8 ">
+                            <div id="logo" class="flex h-screen justify-center align-middle pt-8 ">
                                 <x-jet-application-logo class="block h-12 w-auto" />
                             </div>
                             Panel

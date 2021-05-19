@@ -17,6 +17,9 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="alternate icon" href="/favicon.ico">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01">
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -38,11 +41,14 @@
             <main>
                 {{ $slot }}
             </main>
-            @livewire('testbar')
+            
         </div>
-
+        
         @stack('modals')
 
         @livewireScripts
+        <footer style="position: relative; bottom: 0; width:100%">
+        @livewire('footer')
+        </footer>
     </body>
 </html>

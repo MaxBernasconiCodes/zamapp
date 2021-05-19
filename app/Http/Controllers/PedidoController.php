@@ -15,6 +15,7 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $paginacion = 10;
     public function index(Request $request, $operation = 0, $message = '')
     {
         $usuarios = User::withTrashed()->get();
@@ -29,17 +30,17 @@ class PedidoController extends Controller
         switch ($operation)
         {
             case 0:
-                $data = Pedido::with('user')->orderByDesc('created_at')->paginate(20);
+                $data = Pedido::with('user')->orderByDesc('created_at')->paginate($this->paginacion);
                 $operacion = 'Activos';
                 $message = 'Mostrando solo los registros de Pedidos Activos';
                 break;
             case 1:
-                $data = Pedido::with('user')->withTrashed()->orderByDesc('created_at')->paginate(20);
+                $data = Pedido::with('user')->withTrashed()->orderByDesc('created_at')->paginate($this->paginacion);
                 $message = 'Mostrando todos los registros de Pedidos';
                 $operacion = 'Todos';
                 break;
             case 2:
-                $data = Pedido::with('user')->onlyTrashed()->orderByDesc('created_at')->paginate(20);
+                $data = Pedido::with('user')->onlyTrashed()->orderByDesc('created_at')->paginate($this->paginacion);
                 $operacion = 'Eliminados';
                 $message = 'Mostrando los registros de Pedidos Eliminados';
                 break;
@@ -66,7 +67,7 @@ class PedidoController extends Controller
                 $filtros['estado'] = $request->estado;
                 }
 
-                $data = $data->paginate(20);
+                $data = $data->paginate($this->paginacion);
                 break;
         }
 

@@ -136,9 +136,7 @@
                     <br>
                     <hr>
                 </div>
-            </div>
-            <hr class="border-b-2 mt-4">
-
+                
             <div class="flex-row">
                 <div class="flex items-center justify-center mt-4">
                     <x-jet-button >
@@ -146,6 +144,9 @@
                     </x-jet-button>
                 </div>
             </div>
+            </div>
+            <hr class="border-b-2 mt-4">
+
         </form>
     </x-jet-authentication-card>
 </x-app-layout>
