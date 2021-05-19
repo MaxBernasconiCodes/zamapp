@@ -1,10 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-    @if($message != '')
-    <livewire:alert.message :message="$message" />
-    @endif
-
-    <div style="display: flex; justify-content:space-between; align-items:center">
+  <div style="display: flex; justify-content:space-between; align-items:center">
         <div>
             {{ __('Administracion de usuarios: ') }}
             <a href="{{route('userIndex')}}/1" class="hover:text-green-600 hover:underline"> 

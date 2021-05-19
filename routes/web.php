@@ -14,9 +14,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('/', 'App\Http\Controllers\PedidoController@index');
 });
+
+
+
     //Rutas de testeo
 Route::get('/test/user', 'App\Http\Controllers\TestController@singleUser')->name('factorySingleUser');
 Route::get('/test/admin', 'App\Http\Controllers\TestController@admin')->name('factoryAdmin');

@@ -1,9 +1,5 @@
 <x-app-layout>
     <x-slot name="header">
-    @if($message != '')
-    <livewire:alert.message :message="$message" :color='"green"' />
-    @endif
-
     <div style="display: flex; justify-content:space-between; align-items:center">
         <div>
             {{ __('Administracion de pedidos: ') }}
