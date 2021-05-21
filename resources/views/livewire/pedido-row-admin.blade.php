@@ -41,11 +41,11 @@
         </a>
         <td>
         <div class="flex flex-wrap justify-around rounded py-2">
-            <a href="{{route('pedidoEdit', $pedido->id)}}" class="text-center rounded w-1/2 bg-blue-800 text-blue-200 p-2">Editar</a>
+            @livewire('button', ['href' => "{{route('pedidoEdit', $pedido->id)}}", 'color' => "gray", 'operation' => "edit"])
             @if(!$pedido->trashed())
-            <form action="{{route('pedidoDelete', $pedido->id)}}" class="flex rounded w-1/2" method="POST"> @csrf @method('DELETE') <button class="w-full rounded bg-red-800 text-red-200 p-2">Eliminar</button></form>
+            @livewire('button', ['href' => "{{route('pedidoDelete', $pedido->id)}}", 'color' => "gray", 'operation' => "trash"])
             @else
-            <form action="{{route('pedidoDelete', $pedido->id)}}" class=" flex rounded w-1/2" method="POST"> @csrf @method('DELETE') <button class=" w-full rounded bg-yellow-800  text-yellow-200 p-2">Reactivar</button></form>
+            @livewire('button', ['href' => "{{route('pedidoDelete', $pedido->id)}}", 'color' => "gray", 'operation' => "recover"])
             @endif
         </div>
         </td>

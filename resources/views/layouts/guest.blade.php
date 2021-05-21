@@ -17,10 +17,11 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg">
         <link rel="alternate icon" href="/favicon.ico">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01">    
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01"> 
+   
     </head>
-    <body>
-        <div class="font-sans text-gray-900 antialiased">
+    <body >
+        <div class="font-sans antialiased" >
             {{ $slot }}
         </div>
     </body>
