@@ -1,6 +1,17 @@
 <?php
+use App\Http\Livewire\InicioRedirect;
 
+use App\Http\Livewire\AdminUsersIndex;
+use App\Http\Livewire\AdminUsersCreate;
+use App\Http\Livewire\AdminUsersEdit;
+use App\Http\Livewire\AdminUsersShow;
+
+use App\Http\Livewire\AdminPedidosIndex;
+use App\Http\Livewire\AdminPedidosCreate;
+use App\Http\Livewire\AdminPedidosEdit;
+use App\Http\Livewire\AdminPedidosShow;
 use Illuminate\Support\Facades\Route;
+
 use Illuminate\Http\Request; 
 
 /*
@@ -15,7 +26,7 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/', 'App\Http\Controllers\PedidoController@index');
+    Route::get('/', InicioRedirect::class)->name('Inicio');
 });
 
 
@@ -27,28 +38,36 @@ Route::get('/test/users/{amount}', 'App\Http\Controllers\TestController@lotsUser
 Route::get('/test/pedido', 'App\Http\Controllers\TestController@singlePedido')->name('factorySinglePedido');
 Route::get('/test/pedidos/{amount}', 'App\Http\Controllers\TestController@lotsPedidos')->name('factoryPedidos');
 
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
 Route::group(['middleware'=>'admins'],function(){
 
-    //Rutas de usuario y admin
-    Route::get('/users/index/{operation?}','App\Http\Controllers\UserManagementController@index')->name('userIndex');
-    Route::get('/users/create','App\Http\Controllers\UserManagementController@create')->name('usersCreate');
-    Route::post('/users','App\Http\Controllers\UserManagementController@store')->name('usersRegister');
-    Route::get('/users/show/{id}','App\Http\Controllers\UserManagementController@show')->name('usersShow');
-    Route::get('/users/edit/{id}','App\Http\Controllers\UserManagementController@edit')->name('usersEdit');
-    Route::patch('/users/update/{id}','App\Http\Controllers\UserManagementController@update')->name('usersModify');
-    Route::delete('/users/delete/{id}','App\Http\Controllers\UserManagementController@destroy')->name('usersDelete');
-    //Rutas de Pedidos
-    Route::get('/pedidos/index/{operation?}','App\Http\Controllers\PedidoController@index')->name('pedidoIndex');
-    Route::get('/pedidos/index/3','App\Http\Controllers\PedidoController@index')->name('filterPedidos');
-    Route::get('/pedidos/create','App\Http\Controllers\PedidoController@create')->name('pedidoCreate');
-    Route::post('/pedidos','App\Http\Controllers\PedidoController@store')->name('pedidoRegister');
-    //Route::get('/users/show/{id}','App\Http\Controllers\PedidoController@show')->name('usersShow');
-    Route::get('/pedidos/edit/{id}','App\Http\Controllers\PedidoController@edit')->name('pedidoEdit');
-    Route::patch('/pedidos/update/{id}','App\Http\Controllers\PedidoController@update')->name('pedidoModify');
-    Route::delete('/pedidos/delete/{id}','App\Http\Controllers\PedidoController@destroy')->name('pedidoDelete');
+    //Rutas Viejas de usuario y admin
+    //Route::get('/users/index/{operation?}','App\Http\Controllers\UserManagementController@index')->name('userIndex');
+    //Route::get('/users/create','App\Http\Controllers\UserManagementController@create')->name('usersCreate');
+    //Route::post('/users','App\Http\Controllers\UserManagementController@store')->name('usersRegister');
+    //Route::get('/users/show/{id}','App\Http\Controllers\UserManagementController@show')->name('usersShow');
+    //Route::get('/users/edit/{id}','App\Http\Controllers\UserManagementController@edit')->name('usersEdit');
+    //Route::patch('/users/update/{id}','App\Http\Controllers\UserManagementController@update')->name('usersModify');
+    //Route::delete('/users/delete/{id}','App\Http\Controllers\UserManagementController@destroy')->name('usersDelete');
+    
+    //Rutas viejas de Pedidos
+    //Route::get('/pedidos/index/{operation?}','App\Http\Controllers\PedidoController@index')->name('pedidoIndex');
+    //Route::get('/pedido/pedidos/{operacion?}', UserPedidosIndex::class)->name('pedidoPedidosIndex');
+    //Route::get('/pedidos/create','App\Http\Controllers\PedidoController@create')->name('pedidoCreate');
+    //Route::post('/pedidos','App\Http\Controllers\PedidoController@store')->name('pedidoRegister');
+    //Route::get('/pedido/show/{id}','App\Http\Controllers\PedidoController@show')->name('pedidoShow');
+    //Route::get('/pedidos/edit/{id}','App\Http\Controllers\PedidoController@edit')->name('pedidoEdit');
+    //Route::patch('/pedidos/update/{id}','App\Http\Controllers\PedidoController@update')->name('pedidoModify');
+    //Route::delete('/pedidos/delete/{id}','App\Http\Controllers\PedidoController@destroy')->name('pedidoDelete');
+
+    //Nuevas Rutas Pedidos
+    Route::get('/admin/pedidos/create', AdminPedidosCreate::class)->name('adminPedidosCreate');
+    Route::get('/admin/pedidos/show/{id}', AdminPedidosShow::class)->name('adminPedidosShow');
+    Route::get('/admin/pedidos/edit/{id}', AdminPedidosEdit::class)->name('adminPedidosEdit');
+    Route::get('/admin/pedidos/{operacion?}', AdminPedidosIndex::class)->name('adminPedidosIndex');
+
+    //Nuevas Rutas Users
+    Route::get('/admin/users/create', AdminUsersCreate::class)->name('adminUsersCreate');
+    Route::get('/admin/users/show/{id}', AdminUsersShow::class)->name('adminUsersShow');
+    Route::get('/admin/users/edit/{id}', AdminUsersEdit::class)->name('adminUsersEdit');
+    Route::get('/admin/users/{operacion?}', AdminUsersIndex::class)->name('adminUsersIndex');
 });

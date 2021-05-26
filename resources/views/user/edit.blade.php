@@ -1,16 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    <div class="flex justify-center items-center">
+        <p class="font-semibold text-center text-xl text-gray-800 leading-tight">
            Usuario: {{ $user->name }}
-            @if(!$user->trashed())
-                @if(\Illuminate\Support\Facades\Auth::user()->id != $user->id)
-                <form id="delete_{{$user->id}}" action="{{url('/users/delete/'.$user->id)}}" method="POST" class="inline"  >@csrf @method('DELETE') <button class="bg-red-800 text-red-200   font-semibold px-2 rounded-r-full  ">Eliminar</button></form>
-                @endif
+        </p>
+        <div class="flex">
+        @if(!$user->trashed())
+            @if(\Illuminate\Support\Facades\Auth::user()->id != $user->id)
+                @livewire('button', ['href' => "{{route('usersDelete', $user->id)}}", 'color' => "gray", 'operation' => "trash"])                @endif
             @else
-                <form id="reactivate_{{$user->id}}" action="{{url('/users/delete/'.$user->id)}}" method="POST" class="inline">@csrf @method('DELETE') <button class="bg-yellow-800 text-yellow-200   font-semibold px-2 rounded-r-full  ">Reactivar</button></form>
+                @livewire('button', ['href' => "{{route('usersDelete', $user->id)}}", 'color' => "gray", 'operation' => "recover"])
             @endif
-
-        </h2>
+        </div>
+    </div>
     </x-slot>
 
     <x-jet-authentication-card>

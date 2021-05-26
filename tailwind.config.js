@@ -1,3 +1,4 @@
+const { fontWeight } = require('tailwindcss/defaultTheme');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
@@ -11,14 +12,35 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                montserrat: ['Montserrat', ...defaultTheme.fontFamily.sans],
+                roboto: ['Roboto', ...defaultTheme.fontFamily.sans]
+            },
+            colors: {
+                zam:
+                {
+                    green: '#B9CE26',
+                    white: '#FFFFFF',
+                    light: '#FCFCFC',
+                    gray: '#9E9E9E',
+                    dark: '#707070',
+                    alert: '#FBBF24',
+                    danger: '#DC2626',
+                },
             },
         },
+
     },
 
     variants: {
         extend: {
             opacity: ['disabled'],
+            fontWeight: ['active'],
+            backgroundColor: ['active'],
+            backgroundColor: ['checked'],
+            backgroundColor: ['even'],
+            backgroundColor: ['odd'],
+            textColor: ['odd'],
+            borderColor: ['checked'],
         },
     },
 

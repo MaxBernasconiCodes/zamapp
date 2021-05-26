@@ -52,7 +52,7 @@
                         @endif
                     </td>
                     <td>
-                    <div class="flex flex-wrap justify-around rounded py-2">
+                    <div class="flex flex-wrap justify-center rounded py-2">
                         <a id="edit__{{$usuario->id}}" href="{{route('usersEdit', $usuario->id)}}"  class="text-center rounded w-1/2 bg-blue-800 text-blue-200 p-2"> Editar </a>
                         @if(!$usuario->trashed())
                             @if(\Illuminate\Support\Facades\Auth::user()->id != $usuario->id)

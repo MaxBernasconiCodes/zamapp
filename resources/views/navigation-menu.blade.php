@@ -1,22 +1,21 @@
-<nav x-data="{ open: false }" class="bg-green-800 border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-zam-dark border-b border-zam-light ">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div class="flex justify-between h-16 ">
+            <div class="flex ">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('Inicio') }}">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
-
                 <!-- Navigation Links -->
                 <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
                     @if( \Illuminate\Support\Facades\Auth::user()->is_admin)
-                        <x-jet-nav-link href="{{ route('userIndex') }}" :active="request()->routeIs('userIndex')">
+                        <x-jet-nav-link href="{{ route('adminUsersIndex') }}" :active="request()->routeIs('adminUsersIndex')">
                             {{ __('Usuarios') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('pedidoIndex') }}" :active="request()->routeIs('pedidoIndex')">
+                        <x-jet-nav-link href="{{ route('adminPedidosIndex') }}" :active="request()->routeIs('adminPedidosIndex')">
                             {{ __('Pedidos') }}
                         </x-jet-nav-link>
                     @endif
@@ -43,7 +42,7 @@
                             <x-slot name="content">
                                 <div class="w-60">
                                     <!-- Team Management -->
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                    <div class="block px-4 py-2 text-xs text-zam-dark">
                                         {{ __('Manage Team') }}
                                     </div>
 
@@ -58,10 +57,10 @@
                                         </x-jet-dropdown-link>
                                     @endcan
 
-                                    <div class="border-t border-gray-100"></div>
+                                    <div class="border-t border-zam-gray"></div>
 
                                     <!-- Team Switcher -->
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                    <div class="block px-4 py-2 text-xs text-zam-dark">
                                         {{ __('Switch Teams') }}
                                     </div>
 
@@ -147,7 +146,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+            <x-jet-responsive-nav-link href="{{ route('Inicio') }}" :active="request()->routeIs('Inicio')">
                 {{ __('Panel Principal') }}
             </x-jet-responsive-nav-link>
         </div>

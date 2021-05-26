@@ -1,4 +1,4 @@
-<img src="/zamlogo.png" alt="Logo">
+<img src="/zamlogo.png" alt="Logo" class="max-h-12 max-w-4 flex-grow-0 mx-3"> 
 
 <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="64" height="64" viewBox="0, 0, 515, 450">
     <g id="Layer_1">

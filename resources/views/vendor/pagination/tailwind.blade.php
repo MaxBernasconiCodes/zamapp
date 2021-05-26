@@ -85,17 +85,6 @@
                 </span>
             </div>
             <br>
-            <!-- <div>
-                <p class="text-sm text-gray-700 leading-5">
-                    {!! __('Mostrando') !!}
-                    <span class="font-medium">{{ $paginator->firstItem() }}</span>
-                    {!! __('a') !!}
-                    <span class="font-medium">{{ $paginator->lastItem() }}</span>
-                    {!! __('de') !!}
-                    <span class="font-medium">{{ $paginator->total() }}</span>
-                    {!! __('resultados') !!}
-                </p>
-            </div> -->
         </div>
     </nav>
 @endif

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pedido;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,15 +19,22 @@ class PedidoController extends Controller
     public $paginacion = 10;
     public function index(Request $request, $operation = 0, $message = '')
     {
-        $usuarios = User::withTrashed()->get();
-        $clientes = User::withTrashed()->where('is_admin', '0')->orderBy('business')->get();
+        if(Auth::user()->is_admin == 1){
+            $usuarios = User::withTrashed()->get();
+            $clientes = User::withTrashed()->where('is_admin', '0')->orderBy('business')->get();  
+        }
+        else{
+            $usuarios = User::withTrashed()->where('id', Auth::user()->id)->get();
+            $clientes = User::withTrashed()->where('is_admin', '0')->where('id', Auth::user())->orderBy('business')->get();  
+        }
+
         $filtros['semana_salida'] = null;
         $filtros['user_id'] = null;
         $filtros['estado'] = null;
         $filtros['query'] = null;
         
         
-        
+        if(Auth::user()->is_admin == 1) {
         switch ($operation)
         {
             case 0:
@@ -70,8 +78,55 @@ class PedidoController extends Controller
                 $data = $data->paginate($this->paginacion);
                 break;
         }
+        
 
-
+}
+else
+        {
+            switch ($operation)
+            {
+                case 0:
+                    $data = Pedido::with('user')->where('user_id', Auth::user()->id)->orderByDesc('created_at')->paginate($this->paginacion);
+                    $operacion = 'Activos';
+                    $message = 'Mostrando solo los registros de Pedidos Activos';
+                    break;
+                case 1:
+                    $data = Pedido::with('user')->withTrashed()->where('user_id', Auth::user()->id)->orderByDesc('created_at')->paginate($this->paginacion);
+                    $message = 'Mostrando todos los registros de Pedidos';
+                    $operacion = 'Todos';
+                    break;
+                case 2:
+                    $data = Pedido::with('user')->onlyTrashed()->where('user_id', Auth::user()->id)->orderByDesc('created_at')->paginate($this->paginacion);
+                    $operacion = 'Eliminados';
+                    $message = 'Mostrando los registros de Pedidos Eliminados';
+                    break;
+                case 3:
+                    $data = Pedido::withTrashed()->where('user_id', Auth::user()->id)->orderByDesc('created_at');
+                    $message = 'Mostrando los resultados filtrados';
+                    $operacion = 3;
+    
+                    if(!is_null($request->semana_salida))
+                    {
+                    $data =  $data->where('semana_salida', $request->semana_salida)->where('user_id', Auth::user()->id);
+                    $filtros['semana_salida'] = $request->semana_salida;
+                    }
+            
+                    if(!is_null($request->user_id))
+                    {
+                    $data = $data->where('user_id', $request->user_id)->where('user_id', Auth::user()->id);
+                    $filtros['user_id'] = $request->user_id;
+                    }
+            
+                    if(!is_null($request->estado))
+                    {
+                    $data = $data->where('estado', $request->estado)->where('user_id', Auth::user()->id);
+                    $filtros['estado'] = $request->estado;
+                    }
+    
+                    $data = $data->paginate($this->paginacion);
+                    break;
+            }
+        }
         return view('pedido.index', compact(['data','usuarios','operacion','message','clientes','filtros']));
     }
 
@@ -210,17 +265,12 @@ class PedidoController extends Controller
     public function destroy($id)
     {
         $pedido = Pedido::withTrashed()->findOrFail($id);
-        $message ='No se pudo realizar la operacion de eliminacion del pedido ' . $pedido->name ;
         if (!$pedido->trashed()) {
-            $pedido->delete();
-            $message = 'Pedido Eliminado Exitosamente';
+            $pedido->delete();    
         }
         else{
-            $pedido->restore();
-            $message="Reactivacion del pedido $pedido->id exitosa";
-            return redirect()->route('pedidoIndex',['message' => $message]);
+            $pedido->restore();   
         }
-        return redirect()->route('pedidoIndex',['message' => $message]);
     }
 
    
