@@ -72,8 +72,8 @@
             
         </div>
             <div class="grid col-span-2 row-span-2">
-            <button name="filtrar" id="filtrar" class="rounded-lg bg-zam-white  border border-zam-dark" > Filtrar </button>
-            <input name="reset" id="reset" type="reset" class="rounded-lg bg-zam-white  border border-zam-dark" value="Reestablecer">     </div>
+            <button name="filtrar" id="filtrar" class="cursor-pointer hover:text-zam-light hover:bg-zam-gray rounded-lg hover:shadow bg-zam-white  border border-zam-dark" > Filtrar </button>
+            <input name="reset" id="reset" type="reset" class=" cursor-pointer hover:text-zam-light hover:bg-zam-gray hover:shadow rounded-lg bg-zam-white  border border-zam-dark" value="Reestablecer">     </div>
             </form>
         </div>
     <!-- each row -->

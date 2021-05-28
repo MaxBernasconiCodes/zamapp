@@ -11,6 +11,7 @@ class document extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
     public function pedido()
     {
         return $this->BelongsTo(Pedido::class);

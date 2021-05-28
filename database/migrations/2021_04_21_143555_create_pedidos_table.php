@@ -21,7 +21,7 @@ class CreatePedidosTable extends Migration
             $table->text('consolidacion');
             $table->text('destino');
             $table->integer('contenedores');
-            $table->text('descripcion');
+            $table->text('descripcion')->nullable();
             $table->integer('pedido_nro')->unique();
             $table->text('semana_salida');
             $table->date('fecha_cortedocumental');

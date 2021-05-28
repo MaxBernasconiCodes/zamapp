@@ -62,7 +62,7 @@ Route::group(['middleware'=>'admins'],function(){
     //Nuevas Rutas Pedidos
     Route::get('/admin/pedidos/create', AdminPedidosCreate::class)->name('adminPedidosCreate');
     Route::get('/admin/pedidos/show/{id}', AdminPedidosShow::class)->name('adminPedidosShow');
-    Route::get('/admin/pedidos/edit/{id}', AdminPedidosEdit::class)->name('adminPedidosEdit');
+    Route::get('/admin/pedidos/edit/{pedido_id}', AdminPedidosEdit::class)->name('adminPedidosEdit');
     Route::get('/admin/pedidos/{operacion?}', AdminPedidosIndex::class)->name('adminPedidosIndex');
 
     //Nuevas Rutas Users

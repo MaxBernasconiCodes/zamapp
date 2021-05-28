@@ -15,8 +15,10 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->text('original');
             $table->text('direccion');
             $table->foreignId('pedido_id');
+            $table->boolean('descargado');
             $table->timestamps();
             $table->softDeletes();
         });
