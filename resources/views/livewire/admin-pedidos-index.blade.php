@@ -6,26 +6,26 @@
                 <div class="hover:bg-zam-gray hover:shadow-xl @if($operacion == 1) bg-zam-dark text-zam-green @endif p-1  m-2 rounded-lg border border-transparent">
                     <div class="flex-col justify-center align-middle">
                     <input wire:model="operacion" type="radio" class="checked:bg-zam-green hidden" name="operacion" id="Todos" value="1">
-                    <label for="Todos" class="p-2">Todos</label>
+                    <label for="Todos" class="p-2 rounded-lg shadow">Todos</label>
                     </div>
                 </div>
-                <div class="hover:bg-zam-gray hover:shadow-xl @if($operacion == 2) bg-zam-dark text-zam-green @endif p-1 m-2 rounded-lg border border-transparent">   
+                <div class="hover:bg-zam-gray hover:shadow-xl shadow  @if($operacion == 2) bg-zam-dark text-zam-green @endif p-1 m-2 rounded-lg border border-transparent">   
                     <div class="inline-block">
                     <input wire:model="operacion" type="radio" class="checked:bg-zam-green hidden " name="operacion" id="Activos" value="2">
-                    <label for="Activos" class="p-2">Activos</label>
+                    <label for="Activos" class="p-2 rounded-lg shadow">Activos</label>
                     </div>
                 </div>
                 <div class="hover:bg-zam-gray hover:shadow-xl @if($operacion == 3) bg-zam-dark text-zam-green @endif p-1 m-2 rounded-lg border border-transparent">
                     <div class="inline-block">
                     <input wire:model="operacion" type="radio" class="checked:bg-zam-green hidden " name="operacion" id="Eliminados" value="3">
-                    <label for="Eliminados" class="p-2">Eliminados</label>
+                    <label for="Eliminados" class="p-2 rounded-lg shadow">Eliminados</label>
                     </div>
                 </div>
                 
                 <div class="hover:bg-zam-dark hover:shadow-xl  bg-zam-gray text-zam-light p-1 m-2 rounded-lg border border-transparent float-right right-5">
-                    <div class="inline-block">
+                    <div class="inline-block rounded-lg">
                     <a href="{{route('adminPedidosCreate')}}">
-                    <label class="p-2">Agregar nuevo</label>
+                    <label class="p-2 rounded-lg shadow">Agregar nuevo</label>
                     </a>
                     </div>
                 </div>
@@ -40,19 +40,19 @@
 <!-- filtros -->
     <form class="font-roboto bg-zam-white" action="{{route('adminPedidosIndex', 4)}}" method="get">
     <div class="mx-auto grid grid-rows-2 grid-cols-12 p-2 mb-2">
-        <div class="grid col-span-2 row-span-2">
-            <input wire:model="pedido_nro" name="pedido_nro" id="pedido_nro" class="rounded-lg" type="number" min="1" maxlength="9" max="999999999" placeholder="N° Pedido" >
-            <input wire:model="semana_salida" name="semana_salida" id="semana_salida" class="rounded-lg" type="week" placeholder="Salida">
+        <div class="grid col-span-2 row-span-2 ">
+            <input wire:model="pedido_nro" name="pedido_nro" id="pedido_nro" class="rounded-lg m-1" type="number" min="1" maxlength="9" max="999999999" placeholder="N° Pedido" >
+            <input wire:model="semana_salida" name="semana_salida" id="semana_salida" class="rounded-lg m-1 shadow" type="week" placeholder="Salida">
         </div>
         <div class="grid col-span-4 row-span-2">
-            <select wire:model="user_business" name="user_business" id="user_business" class="rounded-lg" placeholder="Empresa">
+            <select wire:model="user_business" name="user_business" id="user_business" class="rounded-lg m-1 shadow" placeholder="Empresa">
             <option selected value="" >Empresa</option>
             @forelse($clientes as $empresa)
             <option  value="{{$empresa->business}}" >{{$empresa->business}}</option>
             @empty
             @endforelse
             </select>
-            <select wire:model="user_name" name="user_name" id="user_name" class="rounded-lg"   placeholder="Responsable" >
+            <select wire:model="user_name" name="user_name" id="user_name" class="rounded-lg m-1 shadow"   placeholder="Responsable" >
             <option  selected value="" >Responsable</option>
             @forelse($clientes as $empresa)
             <option value="{{$empresa->name}}">{{$empresa->name}}</option>
@@ -61,9 +61,9 @@
             </select>
         </div>
         <div class="grid col-span-4 row-span-2">
-            <input wire:model="barco_nro_booking" name="barco_nro_booking" id="barco_nro_booking" class="rounded-lg" type="text" placeholder="Booking">
+            <input wire:model="barco_nro_booking" name="barco_nro_booking" id="barco_nro_booking" class="rounded-lg m-1 shadow" type="text" placeholder="Booking">
 
-            <select wire:model="estado" name="estado" id="estado" class="rounded-lg">
+            <select wire:model="estado" name="estado" id="estado" class="rounded-lg m-1 shadow">
             <option value="" selected  class="bg-zam-gray">Cualquier Estado</option>
             <option value="1" class="bg-zam-white text-zam-dark">Preparacion</option>
             <option value="2" class="bg-zam-alert text-zam-dark">In Transit</option>
@@ -72,8 +72,8 @@
             
         </div>
             <div class="grid col-span-2 row-span-2">
-            <button name="filtrar" id="filtrar" class="cursor-pointer hover:text-zam-light hover:bg-zam-gray rounded-lg hover:shadow bg-zam-white  border border-zam-dark" > Filtrar </button>
-            <input name="reset" id="reset" type="reset" class=" cursor-pointer hover:text-zam-light hover:bg-zam-gray hover:shadow rounded-lg bg-zam-white  border border-zam-dark" value="Reestablecer">     </div>
+            <button name="filtrar" id="filtrar" class="cursor-pointer hover:text-zam-light hover:bg-zam-gray rounded-lg hover:shadow bg-zam-white  border border-zam-dark m-1 shadow" > Filtrar </button>
+            <input name="reset" id="reset" type="reset" class=" cursor-pointer hover:text-zam-light hover:bg-zam-gray hover:shadow rounded-lg bg-zam-white  border border-zam-dark m-1 shadow" value="Reestablecer">     </div>
             </form>
         </div>
     <!-- each row -->

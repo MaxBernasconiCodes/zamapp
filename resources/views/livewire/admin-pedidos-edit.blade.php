@@ -158,16 +158,16 @@
         @enderror
         <div class="grid col-span-2 row-span-2 py-2">
             @if(is_null($documento))
-            <label for="archivos" class="rounded bg-zam-gray p-2 text-center cursor-pointer">Agregar Archivos</label>
+            <label for="archivos" class=" shadow-lg rounded bg-zam-gray p-2 text-center cursor-pointer">Agregar Archivos</label>
             @else
             <a wire:click="anularupload" class="rounded bg-zam-gray p-2 text-center cursor-pointe">Archivo listo para subir, Click para quitar</a>
             @endif
             <input hidden id="archivos" name="archivos" wire:model="documento" type="file" accept=".xls,.xlsx,pdf">
             @if(!is_null($documento))
             @if(!$archivoConfirm)
-            <a wire:click="Agregarconfirm" class="rounded-lg bg-zam-green p-2 font-bold text-xl text-center cursor-pointer" > Subir Archivo </a>
+            <a wire:click="Agregarconfirm" class="shadow-lg rounded-lg bg-zam-green p-2 font-bold text-xl text-center cursor-pointer" > Subir Archivo </a>
             @else
-            <a wire:click="AgregarArchivos" class="rounded-lg bg-zam-green p-2 font-bold text-xl text-center cursor-pointer" > ¿Confirma? </a>
+            <a wire:click="AgregarArchivos" class="shadow-lg rounded-lg bg-zam-green p-2 font-bold text-xl text-center cursor-pointer" > ¿Confirma? </a>
             @endif
             @endif
         </div>   

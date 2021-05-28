@@ -32,9 +32,18 @@ class AdminPedidosCreate extends Component
     public function mount()
     {
         $clientes = User::where('is_admin', 0)->orderBy('name')->get();
-        $this->user_id = $clientes->first()->id;
+        if(!is_null($clientes->first())){
+            $this->user_id = $clientes->first()->id;
+        }
 
-        $this->latestnumber = Pedido::latest()->first()->pedido_nro;
+        $lastpedido = Pedido::latest()->first();
+        if(!is_null($lastpedido))
+        {
+            $this->latestnumber = $lastpedido->pedido_nro;
+        }
+        else{
+            $this->latestnumber = 0;
+        }
         $this->latestnumber++;
         if(!Pedido::exists())
         {
