@@ -5,6 +5,7 @@
         </h2>
 </x-slot>
 <x-jet-validation-errors class="mb-4" />
+<button wire:submit.prevent="testtoast">testme</button>
 <form wire:submit.prevent="store">
 <div class="font-roboto rounded-tl-3xl grid grid-cols sm:grid-cols-2 xl:grid-cols-12  gap-y-2 gap-x-3 my-4 mx-auto lg:w-4/5 md:w-full p-2  bg-zam-light">
         <!--Titulo-->
@@ -52,12 +53,7 @@
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label>Agencia</label>
             <input required wire:model="agencia" name="agencia" id="agencia" class="rounded-lg md:max-w-sm" type="text" maxlength="150">
-        </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <label>Despachante</label>
-            <input required wire:model="despachante" name="despachante" id="despachante" class="rounded-lg md:max-w-sm" type="text" maxlength="150">
-
-        </div>        
+        </div>     
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label>Lugar de consolidacion</label>
             <input required wire:model="consolidacion" name="consolidacion" id="consolidacion" class="rounded-lg md:max-w-sm" type="text" maxlength="150">
@@ -82,6 +78,9 @@
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label>Fecha de corte fisico</label>
             <input required wire:model="fecha_cortefisico" name="fecha_cortefisico" id="fecha_cortefisico" class="rounded-lg md:max-w-sm" type="date" >
+        </div>
+        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+            <!-- Espacio disponible para estacionamiento -->
         </div>
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <!-- Espacio disponible para estacionamiento -->

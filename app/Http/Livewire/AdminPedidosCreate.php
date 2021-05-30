@@ -45,13 +45,16 @@ class AdminPedidosCreate extends Component
             $this->latestnumber = 0;
         }
         $this->latestnumber++;
+        
         if(!Pedido::exists())
         {
             $this->pedido_nro = 1;
         }
+        
         else{
             $this->pedido_nro = $this->latestnumber;
         }
+        $this->estado = 1;
     }
     public function render()
     {
@@ -104,6 +107,8 @@ class AdminPedidosCreate extends Component
             'estado' => $this->estado,
         ]);
         $this->resetform();
+        $this->dispatchBrowserEvent('notificacion', ['message' => 'Pedido creado exitosamente!']);
+        
     }
     public function confirmacion ()
     {
@@ -133,5 +138,9 @@ class AdminPedidosCreate extends Component
         $this->fecha_destino = null;
         $this->estado = null;
     
+    }
+    public function testtoast()
+    {
+        $this->dispatchBrowserEvent("notificacion");
     }
 }
