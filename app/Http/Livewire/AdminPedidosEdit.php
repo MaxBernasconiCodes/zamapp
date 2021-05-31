@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Pedido;
 use App\Models\User;
 use App\Models\document;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
@@ -86,7 +87,6 @@ class AdminPedidosEdit extends Component
             'destino' => 'required|min:3',
             'contenedores' =>'required|numeric',
             'descripcion' => [],
-            'pedido_nro' => 'required|numeric',
             'semana_salida' => 'required',
             'fecha_cortedocumental' => 'required|date',
             'fecha_cortefisico' => 'required|date',
@@ -97,7 +97,6 @@ class AdminPedidosEdit extends Component
             'barco_nro_booking' => 'required',
             'fecha_destino' => 'required|date',
             'estado' => 'required|numeric',
-
         ]);
         if ($this->pedido_id) {
         $toupdate = Pedido::find($this->pedido_id);
@@ -121,7 +120,7 @@ class AdminPedidosEdit extends Component
             'fecha_destino' => $this->fecha_destino,
             'estado' => $this->estado,
         ]);
-        $this->resetform();
+        $this->toast('success', 'Pedido actualizado correctamente');
         }
     }
     public function confirmacion ()
@@ -150,7 +149,6 @@ class AdminPedidosEdit extends Component
         $this->barco_nro_booking = null;
         $this->fecha_destino = null;
         $this->estado = null;
-    
     }
     
     public function Agregarconfirm()
@@ -167,24 +165,38 @@ class AdminPedidosEdit extends Component
         $direccion = $this->documento->store('documentos');
         if(!is_null($direccion))
         {
-            $this->validate(
-                [
+            $data = [];
+            $data['documento'] = $this->documento;
+            $data['pedido_id'] = $this->pedido_id;
+            $validacion = Validator::make($data,[
                     'documento' => 'required|file|mimes:xml,xls,xlsm,xlsx,pdf|max:102400',
-                    'pedido_id' => 'required|numeric',
-                    
-                ]
-                );
-        document::create(
+                    'pedido_id' => 'required|numeric',      
+            ],
             [
-                'original' => $this->documento->getClientOriginalName(),
-                'direccion' => $direccion,
-                'pedido_id' => $this->pedido_id,
-                'descargado' => false,
+                'documento.mimes' => ' El Documento debe ser de tipo: xml,xls,xlsm,xlsx o pdf ',
+                'documento.max' => ' El tamaño del documento debe ser menor a 100Mb',
+                'pedido_id.required' => ' Se requiere el numero del pedido al que corresponde el documento'
             ]
+            
             );
-        }
-        else{
-            $this->documento = null;
+                if($validacion->fails())
+                {
+                    $this->documento = null;
+                    $this->toast('error', 'El Documento debe ser menor a 100 mb y de tipo: xml,xls,xlsm,xlsx o pdf');
+                }
+                else{
+                    $documentoNuevo = document::create(
+                        [
+                            'original' => $this->documento->getClientOriginalName(),
+                            'direccion' => $direccion,
+                            'pedido_id' => $this->pedido_id,
+                            'descargado' => false,
+                        ]
+                        );
+                        $this->toast('success', 'Archivo: '. $documentoNuevo['original'] . ' cargado con exito');
+                     
+                }
+           
         }
         $this->documento = null;
         $this->archivoConfirm = false;
@@ -209,5 +221,9 @@ class AdminPedidosEdit extends Component
         $this->documento = null;
         $this->archivoConfirm = false;
         $this->porquitar = null;
+    }
+    public function toast($tipo,$mensaje)
+    {
+        $this->emit('alert', ['type' => $tipo, 'message' => $mensaje]);
     }
 }

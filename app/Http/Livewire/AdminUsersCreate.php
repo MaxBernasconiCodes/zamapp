@@ -69,7 +69,7 @@ class AdminUsersCreate extends Component
                         'password'  => $this->passwordRules(),
                         ]);
 
-                        User::create([
+                        $nuevoUser = User::create([
                         'business'  => $this->business,
                         'name'      => $this->name,
                         'cuit'      => $this->cuit,
@@ -80,7 +80,9 @@ class AdminUsersCreate extends Component
                         'password'  => Hash::make($this->password),
                         'is_admin'  => 0,
                         ]);
-                }
+                        $this->toast('success', ' Usuario: '. $nuevoUser['email'] . ' creado correctamente');
+                        $this->resetform();
+                    }
     }
 
     public function resetform()
@@ -94,6 +96,7 @@ class AdminUsersCreate extends Component
         $this->email = null;      
         $this->password = null;   
         $this->is_admin = 0;  
+        $this->password_confirmation = '';
         $this->confirmacion = false; 
     }
 
@@ -107,4 +110,8 @@ class AdminUsersCreate extends Component
         $this->confirmacion  ? $this->confirmacion = false : $this->confirmacion = true; 
     }
 
+    public function toast($tipo,$mensaje)
+    {
+        $this->emit('alert', ['type' => $tipo, 'message' => $mensaje]);
+    }
 }

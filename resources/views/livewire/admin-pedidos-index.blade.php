@@ -1,5 +1,5 @@
 <div style="min-width: 741px;">
-<div class="bg-zam-gray text-xl  min-w-min ">
+<div class="bg-zam-light text-xl  min-w-min ">
     <div class=" flex pb-2 mx-auto px-4 sm:px-6 lg:px-8 bg-zam-white">
             @if(Auth::user()->is_admin == 1)
              <div class="flex mx-auto max-w-7xl font-roboto font-medium">
@@ -72,17 +72,17 @@
             
         </div>
             <div class="grid col-span-2 row-span-2">
-            <button name="filtrar" id="filtrar" class="cursor-pointer hover:text-zam-light hover:bg-zam-gray rounded-lg hover:shadow bg-zam-white  border border-zam-dark m-1 shadow" > Filtrar </button>
-            <input name="reset" id="reset" type="reset" class=" cursor-pointer hover:text-zam-light hover:bg-zam-gray hover:shadow rounded-lg bg-zam-white  border border-zam-dark m-1 shadow" value="Reestablecer">     </div>
+            <button name="filtrar" id="filtrar" class="cursor-pointer hover:text-zam-light hover:bg-zam-dark rounded-lg hover:shadow bg-zam-gray  border border-zam-light m-1 shadow" > Filtrar </button>
+            <input name="reset" id="reset" type="reset" class=" cursor-pointer hover:text-zam-light hover:bg-zam-dark hover:shadow rounded-lg bg-zam-gray  border border-zam-light m-1 shadow" value="Reestablecer">     </div>
             </form>
         </div>
     <!-- each row -->
         @forelse($data as $pedido)
-        <div class=" hover:border-zam-green border border-transparent grid grid-cols-12 gap-2 mx-auto py-2 px-6 odd:bg-zam-dark odd:text-zam-light">
+        <div class=" hover:border-zam-green border border-transparent grid grid-cols-12 gap-2 mx-auto py-2 px-6 odd:bg-gray-200 ">
         
             <div class="col-span-2  py-1  cursor-pointer">
             <a href="{{route('adminPedidosEdit', $pedido->id)}}">
-                <div class="cursor-pointer"><strong>N°: {{$pedido->pedido_nro}}</strong></div>
+                <div class="cursor-pointer">N°: {{$pedido->pedido_nro}}</div>
                 <div class="cursor-pointer">Salida: {{$pedido->semana_salida}}</div>
                 </a>
             </div>
@@ -91,13 +91,13 @@
             
             @if(!is_Null($pedido->user))
             <a href="{{route('adminUsersShow', $pedido->user->id)}}">
-            <label class="cursor-pointer"><strong>Agencia: {{$pedido->user->business}}</strong></label>
+            <label class="cursor-pointer">Agencia: {{$pedido->user->business}}</label>
             <br>
             <label class="cursor-pointer">Responsable: {{$pedido->user->name}}</label>
             </a>
             @else
-            <label><strong>
-            Agencia: {{$clientes->where('id', $pedido->user_id)->first()->business}}</strong></label>
+            <label>
+            Agencia: {{$clientes->where('id', $pedido->user_id)->first()->business}}</label>
             <br>
             <label>
             Responsable: {{$clientes->where('id', $pedido->user_id)->first()->name}}</label>
@@ -110,7 +110,8 @@
             <br>
             <label>N° Conetenedor: {{$pedido->barco_nro_contenedor}}</label>
         </div>
-        <div class="col-span-2 font-roboto font-medium  grid grid-rows-2 grid-cols-2 gap-1 justify-center text-center py-1 cursor-pointer">
+        <div class="xl:col-span-1 hidden xl:block"></div>
+        <div class="col-span-2 xl:col-span-1 font-roboto font-medium  grid grid-rows-2 grid-cols-2 gap-1 justify-center text-center py-1 cursor-pointer">
             <a href="{{route('adminPedidosEdit', $pedido->id)}}" class="col-span-2">
             @if($pedido->estado == 1)
                     <button class="rounded-lg w-full p-2 bg-zam-light text-zam-dark border border-zam-dark ">Preparacion</button>
@@ -159,10 +160,8 @@
             
         @endforelse
     </div> 
-    <div class="flex align-middle  p-1">
-
-            <?php echo $data->render(); ?>
-        
+    <div class="flex justify-center  text-center p-5">
+            <?php echo $data->render(); ?>      
     </div>
     
 </div>

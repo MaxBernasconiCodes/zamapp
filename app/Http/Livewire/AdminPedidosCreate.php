@@ -73,7 +73,7 @@ class AdminPedidosCreate extends Component
             'destino' => 'required|min:3',
             'contenedores' =>'required|numeric',
             'descripcion' => [],
-            'pedido_nro' => 'required|numeric',
+            'pedido_nro' => 'required|numeric|unique:pedidos',
             'semana_salida' => 'required',
             'fecha_cortedocumental' => 'required|date',
             'fecha_cortefisico' => 'required|date',
@@ -86,7 +86,7 @@ class AdminPedidosCreate extends Component
             'estado' => 'required|numeric',
 
         ]);
-        Pedido::create([
+        $pedidonuevo = Pedido::create([
             'user_id' => $this->user_id,
             'agencia' => $this->agencia,
             'despachante' => $this->despachante,
@@ -107,7 +107,7 @@ class AdminPedidosCreate extends Component
             'estado' => $this->estado,
         ]);
         $this->resetform();
-        $this->dispatchBrowserEvent('notificacion', ['message' => 'Pedido creado exitosamente!']);
+        $this->toast('success','Pedido N°: '.$pedidonuevo['pedido_nro']. ' creado exitosamente');
         
     }
     public function confirmacion ()
@@ -137,10 +137,10 @@ class AdminPedidosCreate extends Component
         $this->barco_nro_booking = null;
         $this->fecha_destino = null;
         $this->estado = null;
-    
     }
-    public function testtoast()
+
+    public function toast($tipo,$mensaje)
     {
-        $this->dispatchBrowserEvent("notificacion");
+        $this->emit('alert', ['type' => $tipo, 'message' => $mensaje]);
     }
 }
