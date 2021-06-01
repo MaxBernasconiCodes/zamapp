@@ -24,14 +24,15 @@ class AdminPedidosIndex extends Component
     //operciones 1-Todos 2-Activos 3-Eliminados 4-busquedas
     public $operacion;
 
-    //filtros
+    //filtros por orden de aplicacion
+    public $deleted_at;
     public $pedido_nro;
     public $semana_salida;
     public $user_business;
     public $user_name;
     public $barco_nro_booking;
     public $estado;
-
+    
 
     public function mount($operacion = 2, Request $request = null)
     {
@@ -52,22 +53,16 @@ class AdminPedidosIndex extends Component
 
     public function render()
     {
-         
-        if($this->operacion == 1)
+            
+            if(!is_null($this->deleted_at) && !empty($this->deleted_at))
             {
-                $data = Pedido::orderByDesc('created_at')->withTrashed()->paginate($this->paginacion);
+                $data = Pedido::orderByDesc('created_at')->withTrashed();
             }
-        elseif($this->operacion == 2)
+            else
             {
-                $data = Pedido::orderByDesc('created_at')->paginate($this->paginacion);
+                $data = Pedido::orderByDesc('created_at');
             }
-        elseif($this->operacion == 3)
-            {
-                $data = Pedido::orderByDesc('created_at')->onlyTrashed()->paginate($this->paginacion);
-            }
-        elseif($this->operacion == 4)
-        {
-            $data = Pedido::orderByDesc('created_at')->withTrashed();
+
             if(!is_null($this->estado) && !empty($this->estado))
             {
                 $data = $data->where('estado', 'LIKE', $this->estado);
@@ -106,13 +101,6 @@ class AdminPedidosIndex extends Component
 
             $data = $data->paginate($this->paginacion);
 
-
-            
-        }
-        else
-            {
-                $data = [];
-            }
         return view('livewire.admin-pedidos-index', compact('data'));
     }
 
@@ -130,5 +118,16 @@ class AdminPedidosIndex extends Component
     public function confirm($id)
     {
         $this->confirmando = $id;
+    }
+
+    public function clearfilters()
+    {
+     $this->deleted_at = null;
+     $this->pedido_nro = null;
+     $this->semana_salida = null;
+     $this->user_business = null;
+     $this->user_name = null;
+     $this->barco_nro_booking = null;
+     $this->estado = null;
     }
 }

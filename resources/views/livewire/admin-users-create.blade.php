@@ -1,8 +1,11 @@
-<div>
+
+<div> 
 <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Creacion de Usuario nuevo') }}
+            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-left" class="svg-inline--fa fa-arrow-circle-left fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm28.9-143.6L209.4 288H392c13.3 0 24-10.7 24-24v-16c0-13.3-10.7-24-24-24H209.4l75.5-72.4c9.7-9.3 9.9-24.8.4-34.3l-11-10.9c-9.4-9.4-24.6-9.4-33.9 0L107.7 239c-9.4 9.4-9.4 24.6 0 33.9l132.7 132.7c9.4 9.4 24.6 9.4 33.9 0l11-10.9c9.5-9.5 9.3-25-.4-34.3z"></path></svg>
         </h2>
+        
 </x-slot>
 <x-jet-validation-errors class="mb-4" />
 <form wire:submit.prevent="store">
@@ -23,22 +26,22 @@
         </div>
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="password">Contraseña</label>
-            <input required wire:model="password" name="password" id="password" class="rounded-lg shadow-lg md:max-w-sm" type="password" maxlength="150">
+            <input required wire:model="password" name="password" id="password" class="rounded-lg shadow-lg md:max-w-sm" type="text" maxlength="150">
         </div>
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="password_confirmation">Confirmar</label>
-            <input required wire:model="password_confirmation" name="password_confirmation" id="password_confirmation" class="rounded-lg shadow-lg md:max-w-sm" type="password" maxlength="150">
+            <input required wire:model="password_confirmation" name="password_confirmation" id="password_confirmation" class="rounded-lg shadow-lg md:max-w-sm" type="text" maxlength="150">
         </div>
-        <div class="grid md:col-span-2 xl:col-span-2 row-span-2 ">
+        <div class="grid md:col-span-2 xl:col-span-2 row-span-2 text-center align-middle p-3">
             <label for="toggleAdmin">Tipo de Usuario</label>
             <div class="flex flex-row">
-            <span wire:click="toggleAdmin" class="hover:bg-zam-dark inline-block w-1/6 max-h-full shadow-lg rounded-l-lg bg-zam-gray font-bold text-xl text-center cursor-pointer">
+            <span wire:click="toggleAdmin" class="hover:bg-zam-dark inline-block w-2/3 max-h-full shadow-lg rounded-l-lg bg-zam-gray font-bold text-xl text-center cursor-pointer">
             <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="exchange-alt" class="inline-block my-auto p-2 w-full svg-inline--fa fa-exchange-alt fa-w-16 text-center" role="img" xmlns="http://www.w3.org/2000/svg" width="48" height="48"  viewBox="0 0 512 512"><path fill="currentColor" d="M0 168v-16c0-13.255 10.745-24 24-24h360V80c0-21.367 25.899-32.042 40.971-16.971l80 80c9.372 9.373 9.372 24.569 0 33.941l-80 80C409.956 271.982 384 261.456 384 240v-48H24c-13.255 0-24-10.745-24-24zm488 152H128v-48c0-21.314-25.862-32.08-40.971-16.971l-80 80c-9.372 9.373-9.372 24.569 0 33.941l80 80C102.057 463.997 128 453.437 128 432v-48h360c13.255 0 24-10.745 24-24v-16c0-13.255-10.745-24-24-24z"></path></svg>
             </span>
             @if($is_admin == 0)
-            <span  class="w-5/6 shadow-lg rounded-r-lg bg-zam-green py-2 font-bold text-xl text-center cursor-pointer " > Usuario </span>
+            <label  class="w-2/3 shadow-lg rounded-r-lg bg-zam-green py-2 font-bold text-2xl  cursor-pointer " > Cliente </label>
             @else
-            <span  class="w-5/6 shadow-lg rounded-r-lg bg-zam-alert py-2 font-bold text-xl text-center cursor-pointer " > Admin </span>
+            <label  class="w-2/3 shadow-lg rounded-r-lg bg-zam-alert py-2 font-bold text-2xl  cursor-pointer " > Admin </label>
             @endif
             </div>
         </div>      
@@ -322,6 +325,7 @@
         <div class="@if($is_admin == 1) disabled hidden @endif grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <!-- Espacio disponible para estacionamiento -->
         </div>
+        
        
        
         <!--Datos-->

@@ -33,6 +33,7 @@ class CreatePedidosTable extends Migration
             $table->text('barco_nro_booking');
             $table->date('fecha_destino');
             $table->integer('estado');
+            $table->date('fecha_estado')->nullable();
 
 
             $table->timestamps();

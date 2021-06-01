@@ -1,8 +1,11 @@
 <div>
 <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+<div class="font-semibold text-xl text-gray-800 leading-tight flex flex-row justify-between"> 
+        <h2 class="flex text-center">
             {{ __('Creacion de pedido nuevo') }}
         </h2>
+        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-circle-left" height="48" class="flex text-zam-green hover:text-zam-dark svg-inline--fa fa-arrow-circle-left fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm28.9-143.6L209.4 288H392c13.3 0 24-10.7 24-24v-16c0-13.3-10.7-24-24-24H209.4l75.5-72.4c9.7-9.3 9.9-24.8.4-34.3l-11-10.9c-9.4-9.4-24.6-9.4-33.9 0L107.7 239c-9.4 9.4-9.4 24.6 0 33.9l132.7 132.7c9.4 9.4 24.6 9.4 33.9 0l11-10.9c9.5-9.5 9.3-25-.4-34.3z"></path></svg>
+</div>
 </x-slot>
 <x-jet-validation-errors :mensajefinal="''" class="mb-4" />
 <form wire:submit.prevent="store">
@@ -89,7 +92,7 @@
         </div>
 
     <!--Titulo-->
-    <div class="grid col-span-2 row-span-4 py-2  border-b sm:border-r border-zam-green select-none">
+    <div class="grid col-span-2 row-span-2 py-2  border-b sm:border-r border-zam-green select-none">
         <button disabled class="text-zam-dark font-extrabold text-3xl select-none cursor-default" > Barco </button>
         </div>
         <!--Datos-->
@@ -97,11 +100,7 @@
             <label for="barco_nombre">Nombre</label>
             <input required wire:model="barco_nombre" name="barco_nombre" id="barco_nombre" class="rounded-lg md:max-w-sm" type="text" minlength="3" maxlength="150">
         </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <label for="barco_contenedores">Contenedores</label>
-            <input required wire:model="barco_contenedores" name="barco_contenedores" id="barco_contenedores" class="rounded-lg md:max-w-sm" type="number" min=0 max="99999999">
-
-        </div>        
+     
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="barco_nro_contenedor">N° de Contenedor</label>
             <input required wire:model="barco_nro_contenedor" name="barco_nro_contenedor" id="barco_nro_contenedor" class="rounded-lg md:max-w-sm" type="text" minlength="3" maxlength="150">
@@ -118,18 +117,7 @@
             <label for="fecha_destino">Fecha de destino</label>
             <input required wire:model="fecha_destino" name="fecha_destino" id="fecha_destino" class=" md:max-w-sm rounded-lg" type="date" >
         </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <!-- Espacio disponible para estacionamiento -->
-        </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <!-- Espacio disponible para estacionamiento -->
-        </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <!-- Espacio disponible para estacionamiento -->
-        </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <!-- Espacio disponible para estacionamiento -->
-        </div>
+
             <!--Titulo-->
     <div class="grid col-span-2 row-span-4 py-2  border-b sm:border-r border-zam-green select-none">
         <button disabled class="text-zam-dark font-extrabold text-3xl select-none cursor-default text-center align-middle inline-block" > Descripcion </button>
@@ -138,7 +126,17 @@
         <div class="grid  col-span-2 xl:col-span-10 row-span-2 py-2 w-full">
             <input wire:model="descripcion" name="descripcion" id="descripcion" class="rounded-lg " type="text" minlength="3" " maxlength="500">
         </div>
-       
+        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+            <!-- Espacio disponible para estacionamiento -->
+        </div>        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+            <!-- Espacio disponible para estacionamiento -->
+        </div>        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+            <!-- Espacio disponible para estacionamiento -->
+        </div>        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+            <!-- Espacio disponible para estacionamiento -->
+        </div>        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+            <!-- Espacio disponible para estacionamiento -->
+        </div>
        
         <!--Datos-->
         <div class="grid md:col-span-2 xl:col-span-2 row-span-2 py-2">

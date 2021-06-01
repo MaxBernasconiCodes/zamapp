@@ -12,12 +12,13 @@
                 <!-- Navigation Links -->
                 <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
                     @if( \Illuminate\Support\Facades\Auth::user()->is_admin)
+                    <x-jet-nav-link href="{{ route('adminPedidosIndex') }}" :active="request()->routeIs('adminPedidosIndex')">
+                            {{ __('Pedidos') }}
+                        </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('adminUsersIndex') }}" :active="request()->routeIs('adminUsersIndex')">
                             {{ __('Usuarios') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('adminPedidosIndex') }}" :active="request()->routeIs('adminPedidosIndex')">
-                            {{ __('Pedidos') }}
-                        </x-jet-nav-link>
+                       
                     @endif
                 </div>
             </div>

@@ -67,18 +67,17 @@ class AdminPedidosCreate extends Component
         $this->solicitado = false;
         $this->validate([
             'user_id' => 'required|numeric',
-            'agencia' => 'required|min:3',
-            'despachante' => 'required|min:3',
-            'consolidacion' => 'required|min:3',
-            'destino' => 'required|min:3',
+            'agencia' => 'required|min:1',
+            'despachante' => 'required|min:1',
+            'consolidacion' => 'required|min:1',
+            'destino' => 'required|min:1',
             'contenedores' =>'required|numeric',
             'descripcion' => [],
             'pedido_nro' => 'required|numeric|unique:pedidos',
             'semana_salida' => 'required',
             'fecha_cortedocumental' => 'required|date',
             'fecha_cortefisico' => 'required|date',
-            'barco_nombre' => 'required|min:3',
-            'barco_contenedores' => 'required|numeric',
+            'barco_nombre' => 'required|min:1',
             'barco_nro_contenedor' => 'required',
             'barco_nro_remito' => 'required',
             'barco_nro_booking' => 'required',
@@ -99,13 +98,16 @@ class AdminPedidosCreate extends Component
             'fecha_cortedocumental' => $this->fecha_cortedocumental,
             'fecha_cortefisico' => $this->fecha_cortefisico,
             'barco_nombre' => $this->barco_nombre,
-            'barco_contenedores' => $this->barco_contenedores,
+            'barco_contenedores' => 0,
             'barco_nro_contenedor' => $this->barco_nro_contenedor,
             'barco_nro_remito' => $this->barco_nro_remito,
             'barco_nro_booking' => $this->barco_nro_booking,
             'fecha_destino' => $this->fecha_destino,
             'estado' => $this->estado,
         ]);
+        
+        $this->latestnumber = $pedidonuevo->pedido_nro;
+        $this->latestnumber++;
         $this->resetform();
         $this->toast('success','Pedido N°: '.$pedidonuevo['pedido_nro']. ' creado exitosamente');
         
