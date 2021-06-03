@@ -1,7 +1,8 @@
 <div>
 <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Creacion de pedido nuevo') }}
+            {{ __('Edicion de pedido N°: ') }}{{$pedido_nro}}
+            
         </h2>
 </x-slot>
 <x-jet-validation-errors class="mb-4" />

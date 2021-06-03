@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminPedidosEdit extends Component
 {
+    protected $listeners = ['confirmYes' => 'accionar'];
+
     use WithFileUploads;
 
     public $pedido_id;
@@ -43,6 +45,7 @@ class AdminPedidosEdit extends Component
     public $estado;
 
     public $documento;
+    public $tempparam;
     
     public function mount()
     {
@@ -193,7 +196,7 @@ class AdminPedidosEdit extends Component
                             'descargado' => false,
                         ]
                         );
-                        $this->toast('success', 'Archivo: '. $documentoNuevo['original'] . ' cargado con exito');
+                        $this->toast('success', 'Archivo: '. $documentoNuevo['original'] . ' cargado con exito', 'Confirmacion');
                      
                 }
            
@@ -222,8 +225,10 @@ class AdminPedidosEdit extends Component
         $this->archivoConfirm = false;
         $this->porquitar = null;
     }
-    public function toast($tipo,$mensaje)
+
+        public function toast($tipo,$mensaje)
     {
         $this->emit('alert', ['type' => $tipo, 'message' => $mensaje]);
     }
+
 }

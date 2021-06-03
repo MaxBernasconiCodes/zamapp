@@ -58,6 +58,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script  src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
         <script>
+               
+        window.livewire.on('alert', param => {
+            toastr[param['type']](param['message']);
             toastr.options = {
               "closeButton": true,
               "debug": false,
@@ -75,8 +78,6 @@
               "showMethod": "fadeIn",
               "hideMethod": "fadeOut"
             }
-            window.livewire.on('alert', param => {
-            toastr[param['type']](param['message']);
             });
         </script>
 

@@ -10,9 +10,9 @@
                     </a>
                 </div>
                 <!-- Navigation Links -->
-                <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex text-white">
+                <div class="space-x-8 sm:-my-px ml-10 flex text-white">
                     @if( \Illuminate\Support\Facades\Auth::user()->is_admin)
-                    <x-jet-nav-link href="{{ route('adminPedidosIndex') }}" :active="request()->routeIs('adminPedidosIndex')">
+                        <x-jet-nav-link href="{{ route('adminPedidosIndex') }}" :active="request()->routeIs('adminPedidosIndex')">
                             {{ __('Pedidos') }}
                         </x-jet-nav-link>
                         <x-jet-nav-link href="{{ route('adminUsersIndex') }}" :active="request()->routeIs('adminUsersIndex')">

@@ -6,20 +6,20 @@
     </div>
 <!-- filtros -->
     <div class="font-roboto bg-zam-white" action="{{route('adminPedidosIndex', 4)}}" method="get">
-    <div class="mx-auto grid grid-rows-2 grid-cols-12 p-2 mb-2">
-        <div class="grid col-span-2 row-span-2 ">
-            <input wire:model="pedido_nro" name="pedido_nro" id="pedido_nro" class="rounded-lg m-1" type="number" min="1" maxlength="9" max="999999999" placeholder="N° Pedido" >
-            <input wire:model="semana_salida" name="semana_salida" id="semana_salida" class="rounded-lg m-1 shadow" type="week" placeholder="Salida">
+    <div class="mx-auto grid grid-rows-2 grid-cols-12 p-2 mb-2 ">
+        <div class="flex flex-col col-span-2 row-span-2  ">
+            <input wire:model="pedido_nro" name="pedido_nro" id="pedido_nro" class="rounded-lg m-1 shadow " type="number" min="1" maxlength="9" max="999999999" placeholder="N° Pedido" >
+            <input wire:model="semana_salida" name="semana_salida" id="semana_salida" class="rounded-lg m-1 shadow " type="week" placeholder="Salida">
         </div>
-        <div class="grid col-span-4 row-span-2">
-            <select wire:model="user_business" name="user_business" id="user_business" class="rounded-lg m-1 shadow" placeholder="Empresa">
+        <div class="flex flex-col col-span-4 row-span-2 w">
+            <select wire:model="user_business" name="user_business" id="user_business" class="rounded-lg m-1 shadow " placeholder="Empresa">
             <option selected value="" >Empresa</option>
             @forelse($clientes as $empresa)
             <option  value="{{$empresa->business}}" >{{$empresa->business}}</option>
             @empty
             @endforelse
             </select>
-            <select wire:model="user_name" name="user_name" id="user_name" class="rounded-lg m-1 shadow"   placeholder="Responsable" >
+            <select wire:model="user_name" name="user_name" id="user_name" class="rounded-lg m-1 shadow "   placeholder="Responsable" >
             <option  selected value="" >Responsable</option>
             @forelse($clientes as $empresa)
             <option value="{{$empresa->name}}">{{$empresa->name}}</option>
@@ -27,8 +27,8 @@
             @endforelse
             </select>
         </div>
-        <div class="grid col-span-4 row-span-2">
-            <input wire:model="barco_nro_booking" name="barco_nro_booking" id="barco_nro_booking" class="rounded-lg m-1 shadow" type="text" placeholder="Booking">
+        <div class="flex flex-col col-span-4 row-span-2">
+            <input wire:model="barco_nro_booking" name="barco_nro_booking" id="barco_nro_booking" class=" rounded-lg m-1 shadow" type="search" placeholder="Booking">
 
             <select wire:model="estado" name="estado" id="estado" class="rounded-lg m-1 shadow">
             <option value="" selected  class="bg-zam-gray">Cualquier Estado</option>
