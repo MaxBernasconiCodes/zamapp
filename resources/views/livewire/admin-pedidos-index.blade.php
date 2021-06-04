@@ -38,8 +38,9 @@
             </select>
             
         </div>
-            <div class="grid col-span-2 row-span-2">
-            <input wire:prename="reset" id="reset" type="reset" class=" cursor-pointer hover:text-zam-gray hover:bg-zam-dark hover:shadow rounded-lg bg-zam-green  bold border border-zam-light m-1 shadow" value="Reestablecer">     </div>
+            <div class="flex flex-col col-span-2 row-span-2">
+            <input wire:prename="reset" id="reset" type="reset" class=" p-2 cursor-pointer hover:text-zam-gray hover:bg-zam-dark hover:shadow rounded-lg bg-zam-green m-1  bold  shadow" value="Reestablecer">
+            <button class="flex m-1"><a href="{{route('adminPedidosCreate')}}" class="shadow rounded-lg p-2 w-full ">Nuevo</a></button>
             </div>
         </div>
     <!-- each row -->

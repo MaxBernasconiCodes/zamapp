@@ -50,33 +50,33 @@
         <button disabled class="text-zam-dark font-extrabold text-xl select-none cursor-default" > Envio </button>
         </div>
         <!--Datos-->
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+        <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="agencia" >Agencia</label>
-            <input required wire:model="agencia" name="agencia" id="agencia" class="rounded-lg  min-w-full" type="text" maxlength="150">
+            <input required wire:model="agencia" name="agencia" id="agencia" class="flex rounded-lg  min-w-full" type="text" maxlength="150">
         </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+        <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="despachante" >Despachante</label>
-            <input required wire:model="despachante" name="despachante" id="despachante" class="rounded-lg min-w-full" type="text" maxlength="150">
+            <input required wire:model="despachante" name="despachante" id="despachante" class=" flex rounded-lg min-w-full" type="text" maxlength="150">
 
         </div>        
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+        <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="consolidacion" >Lugar de consolidacion</label>
-            <input required wire:model="consolidacion" name="consolidacion" id="consolidacion" class="rounded-lg min-w-full" type="text" maxlength="150">
+            <input required wire:model="consolidacion" name="consolidacion" id="consolidacion" class=" flex rounded-lg min-w-full" type="text" maxlength="150">
         </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+        <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="destino" >Destino</label>
             <input required wire:model="destino" name="destino" id="destino" class="rounded-lg min-w-full" type="text" maxlength="150">
         </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+        <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="contenedores" >Contenedores</label>
             <input required  wire:model="contenedores" name="contenedores" id="contenedores" class="rounded-lg min-w-full" type="number" min="0" max="999999">
         </div>
 
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+        <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="fecha_cortedocumental" >Fecha de corte documental</label>
             <input required wire:model="fecha_cortedocumental" name="fecha_cortedocumental" id="fecha_cortedocumental" class=" min-w-full rounded-lg" type="date" >
         </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+        <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="fecha_cortefisico" >Fecha de corte fisico</label>
             <input required wire:model="fecha_cortefisico" name="fecha_cortefisico" id="fecha_cortefisico" class="rounded-lg  min-w-full" type="date" >
         </div>

@@ -16,6 +16,7 @@ class AdminUsersIndex extends Component
     public $usuarios;
     public $clientes;
     public $confirmando = '';
+   
 
     //data de los pedidos
     private $data;
@@ -28,40 +29,29 @@ class AdminUsersIndex extends Component
     public $name;
     public $email;
     public $is_admin = 0;
+    public $deleted = 0;
 
 
     public function mount($operacion = 2, Request $request = null)
     {
         $this->operacion = $operacion;
         $this->usuarios = User::withTrashed()->get();
-        $this->clientes = User::withTrashed()->where('is_admin', '0')->orderBy('business')->get();       
-        if($request != null)
-        {
-            $this->name = request('name');
-            $this->business = request('business');
-            $this->email = request('email');
-            $this->is_admin = request('is_admin');
-        }
+        $this->clientes = User::withTrashed()->where('is_admin', '0')->orderBy('business')->get();    
+        $deleted = 0;   
         
     }
     public function render()
     {
-        
-    if($this->operacion == 1)
-    {
-        $data = User::orderByDesc('created_at')->withTrashed()->paginate($this->paginacion);
-    }
-    elseif($this->operacion == 2)
-    {
-        $data = User::orderByDesc('created_at')->paginate($this->paginacion);
-    }
-    elseif($this->operacion == 3)
-    {
-        $data = User::orderByDesc('created_at')->onlyTrashed()->paginate($this->paginacion);
-    }
-    elseif($this->operacion == 4)
-    {
-    $data = User::orderByDesc('created_at')->withTrashed();
+
+        if($this->deleted == 0)  
+        {
+            $data = User::orderByDesc('created_at');
+        }
+        else
+        {
+            $data = User::orderByDesc('created_at')->onlyTrashed();
+        }
+    
 
     if(!is_null($this->name) && !empty($this->name))
     {
@@ -79,14 +69,12 @@ class AdminUsersIndex extends Component
     if(!is_null($this->is_admin) && !empty($this->is_admin))
     {
         $data = $data->where('is_admin', 'LIKE', $this->is_admin);
-    }  
+    }
+
 
     $data = $data->paginate($this->paginacion);  
-    }
-    else
-    {
-        $data = [];
-    }
+    
+
     return view('livewire.admin-users-index', compact('data'));
     }
 

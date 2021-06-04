@@ -85,6 +85,7 @@ class AdminPedidosCreate extends Component
             'estado' => 'required|numeric',
 
         ]);
+
         $pedidonuevo = Pedido::create([
             'user_id' => $this->user_id,
             'agencia' => $this->agencia,
@@ -108,8 +109,9 @@ class AdminPedidosCreate extends Component
         
         $this->latestnumber = $pedidonuevo->pedido_nro;
         $this->latestnumber++;
-        $this->resetform();
         $this->toast('success','Pedido N°: '.$pedidonuevo['pedido_nro']. ' creado exitosamente');
+        $this->resetform();
+        
         
     }
     public function confirmacion ()
@@ -121,7 +123,6 @@ class AdminPedidosCreate extends Component
     {
         $this->pedido_nro = $this->latestnumber;
         $this->solicitado = false;
-        $this->user_id = null;
         $this->agencia = null;
         $this->despachante = null;
         $this->consolidacion = null;
@@ -139,6 +140,7 @@ class AdminPedidosCreate extends Component
         $this->barco_nro_booking = null;
         $this->fecha_destino = null;
         $this->estado = null;
+        $this->toast('warning', 'reseteado');
     }
 
     public function toast($tipo,$mensaje)
