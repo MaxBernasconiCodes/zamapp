@@ -26,14 +26,14 @@
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01">
 
     </head>
-    <body class="font-montserrat antialiased min-w-md">
+    <body class="font-montserrat antialiased w-screen">
         <x-jet-banner />
-        <div class="min-h-screen bg-zam-gray min-w-min">
+        <div class="min-h-screen bg-zam-gray w-screen">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-zam-light text-zam-dark font-bold shadow min-w-md">
+                <header class="bg-zam-light text-zam-dark font-bold shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>

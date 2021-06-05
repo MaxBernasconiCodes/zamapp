@@ -1,8 +1,8 @@
 <div>
 <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight flex flex-row justify-between">
             {{ __('Edicion de pedido N°: ') }}{{$pedido_nro}}
-            
+            <a href="{{route('adminPedidosIndex')}}"><h2 class="text-2xl hover:text-zam-green ease-in-out duration-150"><i class="fas fa-arrow-circle-left"></i></h2></a>     
         </h2>
 </x-slot>
 <x-jet-validation-errors class="mb-4" />

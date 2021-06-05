@@ -42,7 +42,9 @@ class AdminPedidosEdit extends Component
     public $barco_nro_remito;
     public $barco_nro_booking;
     public $fecha_destino;
+    public $estadoinicial;
     public $estado;
+    public $fecha_estado;
 
     public $documento;
     public $tempparam;
@@ -67,6 +69,7 @@ class AdminPedidosEdit extends Component
         $this->barco_nro_remito = $pedido->barco_nro_remito;
         $this->barco_nro_booking = $pedido->barco_nro_booking;
         $this->fecha_destino = $pedido->fecha_destino;
+        $this->estadoinicial= $pedido->estado;
         $this->estado = $pedido->estado;
         
     }
@@ -81,6 +84,13 @@ class AdminPedidosEdit extends Component
 
     public function update()
     {
+        if($this->estadoinicial != 3)
+        {
+            $this->fecha_estado = $this->estado == 3 ? date("d-m-Y") : null;
+        }
+        else{
+            $this->fecha_estado = $this->estado != 3 ? null : null;
+        }
         $this->solicitado = false;
         $this->validate([
             'user_id' => 'required|numeric',
@@ -152,6 +162,7 @@ class AdminPedidosEdit extends Component
         $this->barco_nro_booking = null;
         $this->fecha_destino = null;
         $this->estado = null;
+        $this->fecha_estado = null;
     }
     
     public function Agregarconfirm()

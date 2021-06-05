@@ -1,5 +1,4 @@
-<div style="min-width: 741px;">
-<div class="bg-zam-light text-xl  min-w-min ">
+<div class="bg-zam-light text-xl w-screen ">
     <div class="bg-zam-white">
             @if(Auth::user()->is_admin == 1)
             
@@ -72,6 +71,7 @@
             <a href="{{route('adminUsersShow', $cliente->id)}}">
                 <div class="cursor-pointer"><strong>Empresa:</strong> {{$cliente->business}}</div>
                 <div class="cursor-pointer"><strong>Responsable:</strong>: {{$cliente->name}}</div>
+                <div class="cursor-pointer"><strong>CUIT:</strong>: {{$cliente->cuit}}</div>
                 </a>
             </div>
         
@@ -79,6 +79,7 @@
         <div class="flex  flex-col col-span-5 py-1 cursor-pointer overflow-x-auto">
             <div class="flex items-baseline flex-row"><i class="fas fa-envelope  mr-1"></i><p> {{ $cliente->email}}  </p>  </div>
             <div class="flex items-baseline flex-row"><i class="fas fa-phone mr-1"></i><p> {{ $cliente->phone}} </p>   </div>
+            <div class="flex items-baseline flex-row"><i class="fas fa-map-marked mr-1"></i><p> {{ $cliente->adress}}  </p>  </div>
         </div>
         <div class="col-span-2 font-roboto font-medium  grid grid-rows-2 grid-cols-2 gap-1 justify-center text-center py-1 cursor-pointer">
            
@@ -126,5 +127,4 @@
             <?php echo $data->render(); ?>      
     </div>
     
-</div>
 </div>

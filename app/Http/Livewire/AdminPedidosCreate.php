@@ -83,7 +83,6 @@ class AdminPedidosCreate extends Component
             'barco_nro_booking' => 'required',
             'fecha_destino' => 'required|date',
             'estado' => 'required|numeric',
-
         ]);
 
         $pedidonuevo = Pedido::create([
@@ -99,16 +98,16 @@ class AdminPedidosCreate extends Component
             'fecha_cortedocumental' => $this->fecha_cortedocumental,
             'fecha_cortefisico' => $this->fecha_cortefisico,
             'barco_nombre' => $this->barco_nombre,
-            'barco_contenedores' => 0,
+            'barco_contenedores' => 0, //se debe quitar este campo en la bsd
             'barco_nro_contenedor' => $this->barco_nro_contenedor,
             'barco_nro_remito' => $this->barco_nro_remito,
             'barco_nro_booking' => $this->barco_nro_booking,
             'fecha_destino' => $this->fecha_destino,
             'estado' => $this->estado,
         ]);
-        
+       
         $this->latestnumber = $pedidonuevo->pedido_nro;
-        $this->latestnumber++;
+        $this->latestnumber = $this->latestnumber + 1;
         $this->toast('success','Pedido N°: '.$pedidonuevo['pedido_nro']. ' creado exitosamente');
         $this->resetform();
         
@@ -129,7 +128,6 @@ class AdminPedidosCreate extends Component
         $this->destino = null;
         $this->contenedores = null;
         $this->descripcion = null;
-        $this->pedido_nro = null;
         $this->semana_salida = null;
         $this->fecha_cortedocumental = null;
         $this->fecha_cortefisico = null;
@@ -139,8 +137,7 @@ class AdminPedidosCreate extends Component
         $this->barco_nro_remito = null;
         $this->barco_nro_booking = null;
         $this->fecha_destino = null;
-        $this->estado = null;
-        $this->toast('warning', 'reseteado');
+        $this->estado = null;        
     }
 
     public function toast($tipo,$mensaje)

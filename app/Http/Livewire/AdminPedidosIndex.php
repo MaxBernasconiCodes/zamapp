@@ -38,17 +38,7 @@ class AdminPedidosIndex extends Component
     {
         $this->operacion = $operacion;
         $this->usuarios = User::withTrashed()->get();
-        $this->clientes = User::withTrashed()->where('is_admin', '0')->orderBy('business')->get();       
-        if($request != null)
-        {
-            $this->pedido_nro = request('pedido_nro');
-            $this->semana_salida = request('semana_salida');
-            $this->user_business = request('user_business');
-            $this->user_name = request('user_name');
-            $this->barco_nro_booking = request('barco_nro_booking');
-            $this->estado = request('estado');
-        }
-        
+        $this->clientes = User::withTrashed()->where('is_admin', '0')->orderBy('business')->get();           
     }
 
     public function render()

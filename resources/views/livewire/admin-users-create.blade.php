@@ -10,9 +10,9 @@
 </x-slot>
 <x-jet-validation-errors class="mb-4" />
 <form wire:submit.prevent="store">
-<div class="font-roboto rounded-3xl p-2 grid grid-cols sm:grid-cols-2 xl:grid-cols-12  gap-y-2 gap-x-3 my-4 mx-auto lg:w-4/5 md:w-full p-2  bg-zam-light">
+<div class="font-roboto rounded-3xl p-2 grid grid-cols sm:grid-cols-2 xl:grid-cols-12  gap-y-2 gap-x-3 my-4 mx-auto w-4/5  bg-zam-light">
         <!--Titulo-->
-        <div class=" shadow-lg flex flex-col col-span-2 lg:row-span-2 py-2 border-b sm:border-r border-zam-green select-none">
+        <div class=" shadow-lg grid col-span-2 lg:row-span-2 py-2 border-b sm:border-r border-zam-green select-none">
         <button disabled class="text-zam-dark font-extrabold text-xl select-none cursor-default" > Usuario </button>
         </div>
         <!--Datos-->
@@ -61,14 +61,31 @@
             <input @if($is_admin == 0) required @endif wire:model="cuit" name="cuit" id="cuit" class="rounded-lg shadow-lg sm:max-w-sm" type="text" type="text" maxlength="150">
         </div>
         <div class="@if($is_admin == 1) disabled hidden @endif flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
+            <label for="consigne">Consigne</label>
+            <input @if($is_admin == 0) required @endif wire:model="consigne" name="consigne" id="consigne" class="rounded-lg shadow-lg sm:max-w-sm" type="text" type="text" maxlength="150">
+        </div>
+        <div class="@if($is_admin == 1) disabled hidden @endif flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
+            <label for="notify">Notify</label>
+            <input @if($is_admin == 0) required @endif wire:model="notify" name="notify" id="notify" class="rounded-lg shadow-lg sm:max-w-sm" type="text" type="text" maxlength="150">
+        </div>
+
+        <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
+        </div>
+
+        <div class="@if($is_admin == 1) disabled hidden @endif flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="phone">Telefono</label>
             <input @if($is_admin == 0) required @endif wire:model="phone" name="phone" id="phone" class="rounded-lg shadow-lg md:max-w-sm" type="tel" maxlength="18">
         </div>
         <div class="@if($is_admin == 1) disabled hidden @endif flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="adress">Direccion</label>
             <input @if($is_admin == 0) required @endif wire:model="adress" name="adress" id="adress" class="rounded-lg shadow-lg md:max-w-sm" type="text" maxlength="150">
+        </div>
+        <div class="@if($is_admin == 1) disabled hidden @endif flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
+            <label for="postalcode">Codigoi Postal</label>
+            <input @if($is_admin == 0) required @endif wire:model="postalcode" name="postalcode" id="postalcode" class="rounded-lg shadow-lg sm:max-w-sm" type="text" type="text" maxlength="150">
+        </div>
 
-        </div>        
+                
         <div class="@if($is_admin == 1) disabled hidden @endif flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="country">Pais</label>
             <input @if($is_admin == 0) required @endif wire:model="country" list="paises" name="country" id="country" class="rounded-lg shadow-lg md:max-w-sm" type="text" maxlength="150">

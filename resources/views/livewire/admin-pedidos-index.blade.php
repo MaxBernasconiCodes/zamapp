@@ -1,11 +1,10 @@
-<div style="min-width: 741px;">
 <div class="bg-zam-light text-xl  min-w-min ">
 
     <div class="mx-auto grid grid-rows-2 grid-cols-12 p-2 mb-2">
     
     </div>
 <!-- filtros -->
-    <div class="font-roboto bg-zam-white" action="{{route('adminPedidosIndex', 4)}}" method="get">
+    <div class="font-roboto bg-zam-white"">
     <div class="mx-auto grid grid-rows-2 grid-cols-12 p-2 mb-2 ">
         <div class="flex flex-col col-span-2 row-span-2  ">
             <input wire:model="pedido_nro" name="pedido_nro" id="pedido_nro" class="rounded-lg m-1 shadow " type="number" min="1" maxlength="9" max="999999999" placeholder="N° Pedido" >
@@ -39,7 +38,7 @@
             
         </div>
             <div class="flex flex-col col-span-2 row-span-2">
-            <input wire:prename="reset" id="reset" type="reset" class=" p-2 cursor-pointer hover:text-zam-gray hover:bg-zam-dark hover:shadow rounded-lg bg-zam-green m-1  bold  shadow" value="Reestablecer">
+            <button wire:click="clearfilters"  class=" p-2 cursor-pointer hover:text-zam-gray hover:bg-zam-dark hover:shadow rounded-lg bg-zam-green m-1  bold  shadow sm:text-sm md:text-lg lg:text-xl">Reestablecer</button>
             <button class="flex m-1"><a href="{{route('adminPedidosCreate')}}" class="shadow rounded-lg p-2 w-full ">Nuevo</a></button>
             </div>
         </div>
@@ -49,8 +48,8 @@
         
             <div class="col-span-2  py-1  cursor-pointer">
             <a href="{{route('adminPedidosEdit', $pedido->id)}}">
-                <div class="cursor-pointer">N°: {{$pedido->pedido_nro}}</div>
-                <div class="cursor-pointer">Salida: {{$pedido->semana_salida}}</div>
+                <div class="cursor-pointer"><strong>N°:</strong> {{$pedido->pedido_nro}}</div>
+                <div class="cursor-pointer"><strong>Salida:</strong> {{$pedido->semana_salida}}</div>
                 </a>
             </div>
         
@@ -58,24 +57,27 @@
             
             @if(!is_Null($pedido->user))
             <a href="{{route('adminUsersShow', $pedido->user->id)}}">
-            <label class="cursor-pointer">Agencia: {{$pedido->user->business}}</label>
+            <label class="cursor-pointer"><strong>Agencia:</strong> {{$pedido->user->business}}</label>
             <br>
-            <label class="cursor-pointer">Responsable: {{$pedido->user->name}}</label>
+            <label class="cursor-pointer"><strong>Responsable:</strong> {{$pedido->user->name}}</label>
+            </a>
+            <br>
+            <label class="cursor-pointer"><strong>CUIT:</strong> {{$pedido->user->cuit}}</label>
             </a>
             @else
             <label>
-            Agencia: {{$clientes->where('id', $pedido->user_id)->first()->business}}</label>
+            <strong>Agencia:</strong> {{$clientes->where('id', $pedido->user_id)->first()->business}}</label>
             <br>
             <label>
-            Responsable: {{$clientes->where('id', $pedido->user_id)->first()->name}}</label>
+            <strong>Responsable:</strong> {{$clientes->where('id', $pedido->user_id)->first()->name}}</label>
             @endif
         </div>
         <div class="col-span-4 py-1 cursor-pointer">
-            <label>Barco: {{$pedido->barco_nombre}}</label>
+            <label><strong>Barco:</strong> {{$pedido->barco_nombre}}</label>
             <br>
-            <label>N° Booking: {{$pedido->barco_nro_booking}}</label>
+            <label><strong>N° Booking:</strong> {{$pedido->barco_nro_booking}}</label>
             <br>
-            <label>N° Conetenedor: {{$pedido->barco_nro_contenedor}}</label>
+            <label><strong>N° Conetenedor:</strong> {{$pedido->barco_nro_contenedor}}</label>
         </div>
         
         <!-- Botonera -->
@@ -86,7 +88,7 @@
             <!-- Estado -->
             <div class="2xl:col-span-1 hidden 2xl:block"></div>
            
-            <a href="{{route('adminPedidosEdit', $pedido->id)}}" class="md:col-span-2">
+            <a href="{{route('adminPedidosEdit', $pedido->id)}}" class="sm:text-sm md:text-lg md:col-span-2 overflow-x-hidden">
             @if($pedido->estado == 1)
                     <button class="rounded-lg w-full p-2 bg-zam-gray text-zam-light border ">Preparacion</button>
             @elseif($pedido->estado == 2)
@@ -139,5 +141,4 @@
             <?php echo $data->render(); ?>      
     </div>
     
-</div>
 </div>

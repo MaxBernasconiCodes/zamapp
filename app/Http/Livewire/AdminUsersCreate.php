@@ -13,10 +13,13 @@ class AdminUsersCreate extends Component
     use PasswordValidationRules;
 
     public $business = '';    
-    public $name = '';          
+    public $name = ''; 
+    public $consigne = '';   
+    public $notify = '';            
     public $cuit = '';           
     public $phone = '';         
-    public $adress = '';        
+    public $adress = '';
+    public $postalcode = '';           
     public $country = '';     
     public $email;        
     public $password;  
@@ -36,9 +39,12 @@ class AdminUsersCreate extends Component
                 $this->validate([
                     'business'  => 'string|max:255',
                     'name'      => 'required|string|max:255',
+                    'consigne'  =>  'string|max:255',
+                    'notify'    =>  'string|max:255',
                     'cuit'      => 'string|max:255',
                     'phone'     => 'string|max:255',
                     'adress'    => 'string|max:255',
+                    'postalcode'=> 'string|max:255',
                     'country'   => 'string|max:255',
                     'email'     => 'required|string|email|max:255|unique:users',
                     'password'  => 'required|between:8,255|confirmed',
@@ -61,9 +67,12 @@ class AdminUsersCreate extends Component
                     $this->validate([
                         'business'  => 'required|string|max:255',
                         'name'      => 'required|string|max:255',
+                        'consigne'  => 'required|string|max:255',
+                        'notify'    => 'required|string|max:255',
                         'cuit'      => 'required|string|max:255',
                         'phone'     => 'required|string|max:255',
                         'adress'    => 'required|string|max:255',
+                        'postalcode'=> 'required|string|max:255',
                         'country'   => 'required|string|max:255',
                         'email'     => 'required|string|email|max:255|unique:users',
                         'password'  => $this->passwordRules(),
@@ -72,9 +81,12 @@ class AdminUsersCreate extends Component
                         $nuevoUser = User::create([
                         'business'  => $this->business,
                         'name'      => $this->name,
+                        'consigne'  => $this->consigne,
+                        'notify'     => $this->notify,
                         'cuit'      => $this->cuit,
                         'phone'     => $this->phone,
                         'adress'    => $this->adress,
+                        'postalcode'=> $this->postalcode,
                         'country'   => $this->country,
                         'email'     => $this->email,
                         'password'  => Hash::make($this->password),
@@ -89,9 +101,12 @@ class AdminUsersCreate extends Component
     {
         $this->business = '';
         $this->name = '';
+        $this->consigne = '';
+        $this->notify = '';
         $this->cuit = '';       
         $this->phone = '';      
-        $this->adress = '';    
+        $this->adress = '';
+        $this->postalcode = '';    
         $this->country = '';   
         $this->email = null;      
         $this->password = null;   
