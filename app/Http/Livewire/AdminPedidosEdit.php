@@ -47,9 +47,21 @@ class AdminPedidosEdit extends Component
     public $fecha_estado;
 
     public $documento;
-    public $tempparam;
     
     public function mount()
+    {
+         $this->cargadatos();    
+    }
+
+    public function render()
+    {
+        $clientes = User::where('is_admin', 0)->orderBy('name')->get();
+        $pedido = Pedido::find($this->pedido_id);
+        $documentos = $pedido->documents()->get();
+        return view('livewire.admin-pedidos-edit', compact('clientes', 'documentos'));
+    }
+
+    public function cargadatos()
     {
         $pedido = Pedido::find($this->pedido_id);
         $this->user_id = $pedido->user_id;
@@ -69,24 +81,16 @@ class AdminPedidosEdit extends Component
         $this->barco_nro_remito = $pedido->barco_nro_remito;
         $this->barco_nro_booking = $pedido->barco_nro_booking;
         $this->fecha_destino = $pedido->fecha_destino;
-        $this->estadoinicial= $pedido->estado;
-        $this->estado = $pedido->estado;
         
+        $this->estado = $pedido->estado;
+        $this->estadoinicial= $pedido->estado;
+        $this->fecha_estado= $pedido->fecha_estado;
     }
-
-    public function render()
-    {
-        $clientes = User::where('is_admin', 0)->orderBy('name')->get();
-        $pedido = Pedido::find($this->pedido_id);
-        $documentos = $pedido->documents()->get();
-        return view('livewire.admin-pedidos-edit', compact('clientes', 'documentos'));
-    }
-
     public function update()
     {
         if($this->estadoinicial != 3)
         {
-            $this->fecha_estado = $this->estado == 3 ? date("d-m-Y") : null;
+            $this->fecha_estado = $this->estado == 3 ? date("Y-m-d") : null;
         }
         else{
             $this->fecha_estado = $this->estado != 3 ? null : null;
@@ -94,16 +98,16 @@ class AdminPedidosEdit extends Component
         $this->solicitado = false;
         $this->validate([
             'user_id' => 'required|numeric',
-            'agencia' => 'required|min:3',
-            'despachante' => 'required|min:3',
-            'consolidacion' => 'required|min:3',
-            'destino' => 'required|min:3',
+            'agencia' => 'required',
+            'despachante' => 'required',
+            'consolidacion' => 'required',
+            'destino' => 'required',
             'contenedores' =>'required|numeric',
             'descripcion' => [],
             'semana_salida' => 'required',
             'fecha_cortedocumental' => 'required|date',
             'fecha_cortefisico' => 'required|date',
-            'barco_nombre' => 'required|min:3',
+            'barco_nombre' => 'required',
             'barco_contenedores' => 'required|numeric',
             'barco_nro_contenedor' => 'required',
             'barco_nro_remito' => 'required',
@@ -121,7 +125,6 @@ class AdminPedidosEdit extends Component
             'destino' => $this->destino,
             'contenedores' => $this->contenedores,
             'descripcion' => $this->descripcion,
-            'pedido_nro' => $this->pedido_nro,
             'semana_salida' => $this->semana_salida,
             'fecha_cortedocumental' => $this->fecha_cortedocumental,
             'fecha_cortefisico' => $this->fecha_cortefisico,
@@ -132,8 +135,11 @@ class AdminPedidosEdit extends Component
             'barco_nro_booking' => $this->barco_nro_booking,
             'fecha_destino' => $this->fecha_destino,
             'estado' => $this->estado,
+            'fecha_estado' =>$this->fecha_estado
         ]);
+        $this->estadoinicial == $this->estado;
         $this->toast('success', 'Pedido actualizado correctamente');
+        $this->cargadatos();
         }
     }
     public function confirmacion ()
@@ -141,29 +147,7 @@ class AdminPedidosEdit extends Component
         $this->solicitado = !$this->solicitado;
     }
 
-    public function resetform()
-    {
-        $this->solicitado = false;
-        $this->user_id = null;
-        $this->agencia = null;
-        $this->despachante = null;
-        $this->consolidacion = null;
-        $this->destino = null;
-        $this->contenedores = null;
-        $this->descripcion = null;
-        $this->pedido_nro = null;
-        $this->semana_salida = null;
-        $this->fecha_cortedocumental = null;
-        $this->fecha_cortefisico = null;
-        $this->barco_nombre = null;
-        $this->barco_contenedores = null;
-        $this->barco_nro_contenedor = null;
-        $this->barco_nro_remito = null;
-        $this->barco_nro_booking = null;
-        $this->fecha_destino = null;
-        $this->estado = null;
-        $this->fecha_estado = null;
-    }
+    
     
     public function Agregarconfirm()
     {

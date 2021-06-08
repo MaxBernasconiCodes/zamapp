@@ -3,17 +3,22 @@
             @if(Auth::user()->is_admin == 1)
             
             <div class="grid grid-cols-12 mx-auto" style='border-bottom: 2px solid #eaeaea'>
-                <div class="flex align-bottom col-span-1"></div>
-	            <div class='flex col-span-2 cursor-pointer align-bottom'>
-                    <label for="isnotadmin" class=' flex flex-col  py-2 px-6 bg-white rounded-t-lg @if($is_admin == 0) text-zam-green bold bg-zam-gray @endif ease-in-out duration-150 hover:bg-zam-dark hover:text-zam-light'>Clientes</label>
-                    <label for="isadmin" class='flex py-2 px-6 bg-white rounded-t-lg @if($is_admin == 1) text-zam-green bold bg-zam-gray @endif ease-in-out duration-150 hover:bg-zam-dark hover:text-zam-light'>Admins</label>
+                <div class="flex col-span-1"></div>
+	            <div class='flex flex-row col-span-2 cursor-pointer align-items-center px-2'>
+                    
+                    <label for="isnotadmin" class='inline-flex items-center px-3 pt-1 bg-white rounded-t-lg @if($is_admin == 0) text-zam-green bold bg-zam-gray @endif ease-in-out duration-150 hover:bg-zam-dark hover:text-zam-light'>Clientes</label>
+                    
+                    <label for="isadmin" class='inline-flex items-center px-3 pt-1 bg-white rounded-t-lg @if($is_admin == 1) text-zam-green bold bg-zam-gray @endif ease-in-out duration-150 hover:bg-zam-dark hover:text-zam-light'>Admins</label>
+                    
                     <input type="radio" name="is_admin" wire:model="is_admin" id="isadmin" value="1" class="hidden" >
                     <input type="radio" name="is_admin" wire:model="is_admin" id="isnotadmin" value="0" class="hidden">
                 </div>
                 <div class="col-span-6"></div>
-                <div class='flex flex-nowrap align-baseline col-span-2 cursor-pointer '>    
+                <div class='flex col-span-2 justify-items-center cursor-pointer '>    
                     <a href="{{route('adminUsersCreate')}}"
-                     class="flex flex-col p-2 rounded-lg text-2xl text-zam-dark hover:text-zam-green "><i class="flex  fas fa-user-plus"></i> <p class="hidden md:flex">Nuevo Usuario</p>
+                     class="flex justify-center align-items-center flex-nowrap p-2 rounded-lg text-2xl text-zam-dark hover:text-zam-green ">
+                        <i class="flex  fas fa-user-plus"></i> 
+                        <label class="hidden lg:flex"> Agregar </label>
                     </a>
                 </div>
                 <div class="col-span-1"></div>

@@ -98,18 +98,16 @@ class AdminPedidosCreate extends Component
             'fecha_cortedocumental' => $this->fecha_cortedocumental,
             'fecha_cortefisico' => $this->fecha_cortefisico,
             'barco_nombre' => $this->barco_nombre,
-            'barco_contenedores' => 0, //se debe quitar este campo en la bsd
+            'barco_contenedores' => 0, //se debe quitar este campo en la bd
             'barco_nro_contenedor' => $this->barco_nro_contenedor,
             'barco_nro_remito' => $this->barco_nro_remito,
             'barco_nro_booking' => $this->barco_nro_booking,
             'fecha_destino' => $this->fecha_destino,
             'estado' => $this->estado,
         ]);
-       
-        $this->latestnumber = $pedidonuevo->pedido_nro;
-        $this->latestnumber = $this->latestnumber + 1;
-        $this->toast('success','Pedido N°: '.$pedidonuevo['pedido_nro']. ' creado exitosamente');
+        $this->latestnumber = $pedidonuevo->pedido_nro + 1;
         $this->resetform();
+        $this->toast('success','Pedido creado exitosamente exitosamente');
         
         
     }

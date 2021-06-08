@@ -60,7 +60,6 @@
         <script>
                
         window.livewire.on('alert', param => {
-            toastr[param['type']](param['message']);
             toastr.options = {
               "closeButton": true,
               "debug": false,
@@ -78,6 +77,7 @@
               "showMethod": "fadeIn",
               "hideMethod": "fadeOut"
             }
+            toastr[param['type']](param['message']);
             });
         </script>
 

@@ -29,6 +29,10 @@
             </select>
         </div>        
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
+            <label for="semana_salida" >Salida:</label>
+            <input required wire:model="semana_salida" name="semana_salida" id="semana_salida" class="rounded-lg min-w-full" type="week">
+        </div>
+        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
             <label for="estado" >Estado</label>
             <select required wire:model="estado" name="estado" id="estado" class="rounded-lg min-w-full">
             <option selected value="1" class="bg-zam-light">Preparando</option>
@@ -37,11 +41,10 @@
             </select>
         </div>
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <label for="semana_salida" >Salida:</label>
-            <input required wire:model="semana_salida" name="semana_salida" id="semana_salida" class="rounded-lg min-w-full" type="week">
-        </div>
-        <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <!-- Espacio disponible para estacionamiento -->
+            @if($estado == 3)
+            <label> En fecha: </label>
+            <input type="date" disabled class="rounded-lg" value="{{$fecha_estado}}">
+            @endif
         </div>
 
 
