@@ -3,9 +3,27 @@
     <div class="mx-auto grid grid-rows-2 grid-cols-12 p-2 mb-2">
     
     </div>
+    <div class="grid grid-cols-12 mx-auto" style='border-bottom: 2px solid #eaeaea'>
+                <div class="flex col-span-1"></div>
+	            <div class='flex flex-row col-span-2 cursor-pointer align-items-center px-2'>
+                    
+                    <label for="activos" class='inline-flex items-center px-3 pt-1 bg-white rounded-t-lg @if($eliminado == 1) text-zam-green bold bg-zam-gray @endif ease-in-out duration-150 hover:bg-zam-dark hover:text-zam-light'>Activos</label>
+                    
+                    <label for="eliminados" class='inline-flex items-center px-3 pt-1 bg-white rounded-t-lg @if($eliminado == 0) text-zam-green bold bg-zam-gray @endif ease-in-out duration-150 hover:bg-zam-dark hover:text-zam-light'>Eliminados</label>
+                    
+                    <input type="radio" name="eliminados" wire:model="eliminado" id="activos" value="1" class="hidden" >
+                    <input type="radio" name="eliminados" wire:model="eliminado" id="eliminados" value="0" class="hidden">
+                </div>
+                <div class="col-span-6"></div>
+                <div class='flex col-span-2'>    
+                    
+                </div>
+                <div class="col-span-1"></div>
+                
+            </div>
 <!-- filtros -->
     <div class="font-roboto bg-zam-white">
-    <div class="mx-auto grid grid-rows-2 grid-cols-12 p-2 mb-2 ">
+    <div class="mx-auto grid grid-rows-2 grid-cols-12 p-6 mb-2 ">
         <div class="flex flex-col col-span-2 row-span-2  ">
             <input wire:model="pedido_nro" name="pedido_nro" id="pedido_nro" class="rounded-lg m-1 shadow " type="number" min="1" maxlength="9" max="999999999" placeholder="N° Pedido" >
             <input wire:model="semana_salida" name="semana_salida" id="semana_salida" class="rounded-lg m-1 shadow " type="week" placeholder="Salida">
@@ -37,26 +55,29 @@
             </select>
             
         </div >
-        <div class=" grid grid-cols-5 col-span-2 row-span-2"> 
-        <div class="hidden lg:inline-block lg:col-span-1"> </div>
-            <div class="flex flex-col col-span-5 lg:col-span-3">  
-            <div wire:click="clearfilters"  class=" p-2 cursor-pointer m-1 hover:text-zam-gray  hover:shadow rounded-lg bg-zam-dark text-zam-green bold  shadow text-sm md:text-lg lg:text-xl flex flex-wrap justify-center items-center h-full w-full">
+        <div class=" row-span-2
+        col-span-2 font-roboto font-medium   grid  grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-1 justify-center text-center p-1 cursor-pointer">
+        <div class="2xl:col-span-1 hidden 2xl:block"></div>
+            <div class="flex flex-col md:col-span-2">  
+            <div wire:click="clearfilters"  class=" p-2 cursor-pointer m-1 hover:text-zam-gray  hover:shadow rounded-lg bg-zam-dark text-zam-green bold  shadow text-sm md:text-lg lg:text-xl 
+             h-full w-full flex flex-wrap justify-center items-center ">
+            
             <i class="far fa-minus-square"></i>
             <label class="hidden md:inline md:ml-1">Reestablecer</label>
             </div>
            <a href="{{route('adminPedidosCreate')}}" class="flex justify-center m-1 easinout hover:text-zam-gray bg-zam-dark text-zam-green items-center shadow rounded-lg p-2 h-full w-full "><i class="far fa-plus-square"></i><label class="hidden md:inline md:ml-1">Nuevo</label></a>
             </div>
-            <div class="hidden lg:inline-block lg:col-span-1"> </div>
+            <div class="2xl:col-span-1 hidden 2xl:block"></div>
         </div>
         </div>
     <!-- each row -->
         @forelse($data as $pedido)
         <div class=" hover:border-zam-green border border-transparent grid grid-cols-12 gap-2 mx-auto py-2 px-6 odd:bg-gray-200 ">
         
-            <div class="col-span-2  py-1  cursor-pointer overflow-x-auto">
+            <div class="col-span-2  py-1  cursor-pointer overflow-x-hidden">
             <a href="{{route('adminPedidosEdit', $pedido->id)}}">
                 <div class="cursor-pointer"><strong>N°:</strong> <br><p>{{$pedido->pedido_nro}}</p></div><hr> 
-                <div class="cursor-pointer"><strong><p>Salida:</p></strong><input dissabled type="week" class="-ml-3 -mt-2 border-transparent  text-xl bg-transparent" value="{{$pedido->semana_salida}}" ></div>
+                <div class="cursor-pointer"><strong><p>Salida:</p></strong><input  type="week" disabled class=" -ml-20 p-1 -mt-2 border-transparent  text-xl bg-transparent" value="{{$pedido->semana_salida}}" ></div>
                 </a>
             </div>
         
@@ -77,6 +98,8 @@
             <br>
             <label>
             <strong>Responsable:</strong> {{$clientes->where('id', $pedido->user_id)->first()->name}}</label>
+            <br>
+            <strong>Cuit:</strong> {{$clientes->where('id', $pedido->user_id)->first()->cuit}}</label>
             @endif
         </div>
         <div class="col-span-4 py-1 cursor-pointer overflow-x-auto">
@@ -95,7 +118,7 @@
             <!-- Estado -->
             <div class="2xl:col-span-1 hidden 2xl:block"></div>
            
-            <a href="{{route('adminPedidosEdit', $pedido->id)}}" class="rounded-lg h-full w-full flex flex-wrap justify-center items-center  text-lg  md:col-span-2 overflow-x-hidden
+            <a href="{{route('adminPedidosEdit', $pedido->id)}}" class="rounded-lg h-full w-full flex flex-wrap justify-center items-center  text-lg  md:col-span-2 overflow-x-hidden cursor-pointer
             p-2
             @if($pedido->estado == 1)
             bg-zam-gray text-zam-light "><i class="fas fa-people-carry"></i> <label class="ml-1 hidden md:inline">Preparacion</label>
@@ -146,7 +169,7 @@
         <h1 class=" flex justify-center">No hay pedidos que coincidan con esta busqueda</h1>
         @endforelse
     </div> 
-    <div class="flex justify-center  text-center p-5">
+    <div class="flex flex-row justify-center w-full">
             <?php echo $data->render(); ?>      
     </div>
     

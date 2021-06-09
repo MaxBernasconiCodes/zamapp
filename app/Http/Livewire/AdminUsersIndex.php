@@ -66,10 +66,9 @@ class AdminUsersIndex extends Component
     {
         $data = $data->where('email', 'LIKE', '%'.$this->email.'%');
     } 
-    if(!is_null($this->is_admin) && !empty($this->is_admin))
-    {
-        $data = $data->where('is_admin', 'LIKE', $this->is_admin);
-    }
+
+    $data = $data->where('is_admin', $this->is_admin);
+    
 
 
     $data = $data->paginate($this->paginacion);  

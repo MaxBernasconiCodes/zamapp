@@ -21,8 +21,8 @@ class AdminPedidosIndex extends Component
     //data de los pedidos
     private $data;
 
-    //operciones 1-Todos 2-Activos 3-Eliminados 4-busquedas
-    public $operacion;
+    //eliminado = 1 -> activos ( si ya se , lo hice al revez)
+    public $eliminado = 1;
 
     //filtros por orden de aplicacion
     public $deleted_at;
@@ -34,9 +34,8 @@ class AdminPedidosIndex extends Component
     public $estado;
     
 
-    public function mount($operacion = 2, Request $request = null)
+    public function mount()
     {
-        $this->operacion = $operacion;
         $this->usuarios = User::withTrashed()->get();
         $this->clientes = User::withTrashed()->where('is_admin', '0')->orderBy('business')->get();           
     }
@@ -44,9 +43,9 @@ class AdminPedidosIndex extends Component
     public function render()
     {
             
-            if(!is_null($this->deleted_at) && !empty($this->deleted_at))
+            if($this->eliminado == 0)
             {
-                $data = Pedido::orderByDesc('created_at')->withTrashed();
+                $data = Pedido::orderByDesc('created_at')->onlyTrashed();
             }
             else
             {

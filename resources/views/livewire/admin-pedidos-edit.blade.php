@@ -63,7 +63,7 @@
 
         </div>        
         <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <label for="consolidacion" >Lugar de consolidacion</label>
+            <label for="consolidacion" >Consolidado en</label>
             <input required wire:model="consolidacion" name="consolidacion" id="consolidacion" class=" flex rounded-lg min-w-full" type="text" maxlength="150">
         </div>
         <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
@@ -76,11 +76,11 @@
         </div>
 
         <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <label for="fecha_cortedocumental" >Fecha de corte documental</label>
+            <label for="fecha_cortedocumental" >Corte documental</label>
             <input required wire:model="fecha_cortedocumental" name="fecha_cortedocumental" id="fecha_cortedocumental" class=" min-w-full rounded-lg" type="date" >
         </div>
         <div class="flex flex-col md:col-span-1 xl:col-span-2 row-span-2 py-2">
-            <label for="fecha_cortefisico" >Fecha de corte fisico</label>
+            <label for="fecha_cortefisico" >Corte fisico</label>
             <input required wire:model="fecha_cortefisico" name="fecha_cortefisico" id="fecha_cortefisico" class="rounded-lg  min-w-full" type="date" >
         </div>
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 py-2">
@@ -157,10 +157,11 @@
         </div>
         
         <!--Datos-->
+        
         <div class="grid md:col-span-1 xl:col-span-2 row-span-2 ml-1">
             @if(is_null($documento))
             <label for="archivos" class="w-full shadow-lg rounded-xl bg-zam-gray  p-2 text-center cursor-pointer"> 
-            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-upload" class="flex svg-inline--fa fa-file-upload fa-w-12 w-full max-h-6" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"></path></svg> Agregar Documento 
+            <i class="fas fa-file-upload ml-1"></i> Agregar Documento 
             </label>
             @else
             <span class="flex flex-row"><label class=" flex w-4/5 rounded-tl-lg  bg-zam-gray p-2 text-center cursor-pointe">{{ $documento->getClientOriginalName() }} </label> <span wire:click="anularupload" class=" flex w-1/5 cursor-pointer i rounded-tr-lg bg-zam-danger text-zam-white p-2 "> X </span></span>

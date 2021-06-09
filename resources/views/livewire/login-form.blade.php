@@ -1,3 +1,4 @@
+<div>
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
@@ -24,15 +25,10 @@
             </div>
 
             <div class="mt-4">
-            <span class="flex flex-row"><x-jet-label for="password" value="{{ __('Contraseña') }}" />
-            <label onclick="reveal()" class="ml-2 cursor-pointer ">
-            <i id="eyeopen" class="far fa-eye"></i>
-            <i id="eyeclosed" class="far fa-eye-slash hidden"></i>
-            </label>
-            </span>
+                <x-jet-label for="password" value="{{ __('Contraseña') }}" />
                 <x-jet-input id="password" class="inline mt-1 w-full rounded-l" type="password" name="password" required autocomplete="current-password" />
             </div>
-
+           
 
             <div class="block mt-4">
                 <label for="remember_me" class="flex items-center">
@@ -53,24 +49,9 @@
                 </x-jet-button>
             </div>
         </form>
-       <script>
-       var watch=false;
-         function reveal() {
-             var open = document.getElementById("eyeopen");
-             open.classList.toggle("hidden");   
-             var open = document.getElementById("eyeclosed");
-             open.classList.toggle("hidden");
-             if(!watch)
-             {   
-                document.getElementById('password').type = 'text';
-             }
-             else{
-                document.getElementById('password').type = 'password';
-             }    
-             watch = !watch;      
-         }
-       </script>
+       
     </x-jet-authentication-card>
     
     
 </x-guest-layout>
+</div>

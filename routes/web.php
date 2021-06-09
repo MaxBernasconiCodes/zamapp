@@ -61,13 +61,13 @@ Route::group(['middleware'=>'admins'],function(){
 
     //Nuevas Rutas Pedidos
     Route::get('/admin/pedidos/create', AdminPedidosCreate::class)->name('adminPedidosCreate');
-    Route::get('/admin/pedidos/show/{id}', AdminPedidosShow::class)->name('adminPedidosShow');
+    Route::get('/admin/pedidos/show/{pedido_id}', AdminPedidosShow::class)->name('adminPedidosShow');
     Route::get('/admin/pedidos/edit/{pedido_id}', AdminPedidosEdit::class)->name('adminPedidosEdit');
     Route::get('/admin/pedidos/index', AdminPedidosIndex::class)->name('adminPedidosIndex');
 
     //Nuevas Rutas Users
     Route::get('/admin/users/create', AdminUsersCreate::class)->name('adminUsersCreate');
-    Route::get('/admin/users/show/{id}', AdminUsersShow::class)->name('adminUsersShow');
-    Route::get('/admin/users/edit/{id}', AdminUsersEdit::class)->name('adminUsersEdit');
-    Route::get('/admin/users/{operacion?}', AdminUsersIndex::class)->name('adminUsersIndex');
+    Route::get('/admin/users/show/{user_id}', AdminUsersShow::class)->name('adminUsersShow');
+    Route::get('/admin/users/edit/{user_id}', AdminUsersEdit::class)->name('adminUsersEdit');
+    Route::get('/admin/users/index', AdminUsersIndex::class)->name('adminUsersIndex');
 });

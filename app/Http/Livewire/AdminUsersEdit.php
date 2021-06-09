@@ -10,13 +10,14 @@ use App\Models\User;
 
 class AdminUsersEdit extends Component
 {
-
-    
     public $business                = '';    
     public $name                    = '';          
-    public $cuit                    = '';           
+    public $cuit                    = '';
+    public $consigne                = '';
+    public $notify                  = '';
     public $phone                   = '';         
-    public $adress                  = '';        
+    public $adress                  = '';
+    public $postalcode              = '';        
     public $country                 = '';     
     public $email                       ;        
     public $password                    ;  
@@ -24,9 +25,9 @@ class AdminUsersEdit extends Component
     public $is_admin                = 0;  
     public $confirmacion            = false; 
 
-    public function mount()
+    public function mount($id)
     {
-        $usuario = User::withTrashed()->findOrFail($this->id);
+        $usuario = User::withTrashed()->find($id);
         $this->business             =$usuario->business;
         $this->name                 =$usuario->name;
         $this->cuit                 =$usuario->cuit;
@@ -55,13 +56,16 @@ class AdminUsersEdit extends Component
                     'adress'    => 'string|max:255',
                     'country'   => 'string|max:255',
                 ]);
-                $toupdate = User::findOrFail($this->pedido_id);
+                $toupdate = User::findOrFail($this->user_id);
                 $toupdate->update([
                     'business'  => $this->business,
                     'name'      => $this->name,
                     'cuit'      => $this->cuit,
+                    'consigne'  => $this->consigne,
+                    'notify'    => $this->notify,
                     'phone'     => $this->phone,
                     'adress'    => $this->adress,
+                    'postalcode'=> $this->postalcode,
                     'country'   => $this->country,
                     'is_admin'  => $this->is_admin,
                 ]);
@@ -79,15 +83,18 @@ class AdminUsersEdit extends Component
                         'country'   => 'required|string|max:255',
                         ]);
 
-                        $toupdate = User::find($this->pedido_id);
+                        $toupdate = User::find($this->user_id);
                         $toupdate->update([
-                        'business'  => $this->business,
-                        'name'      => $this->name,
-                        'cuit'      => $this->cuit,
-                        'phone'     => $this->phone,
-                        'adress'    => $this->adress,
-                        'country'   => $this->country,
-                        'is_admin'  => 0,
+                            'business'  => $this->business,
+                            'name'      => $this->name,
+                            'cuit'      => $this->cuit,
+                            'consigne'  => $this->consigne,
+                            'notify'    => $this->notify,
+                            'phone'     => $this->phone,
+                            'adress'    => $this->adress,
+                            'postalcode'=> $this->postalcode,
+                            'country'   => $this->country,
+                            'is_admin'  => $this->is_admin,
                         ]);
                         $this->toast('success', ' Usuario actualizado correctamente');
                     }
